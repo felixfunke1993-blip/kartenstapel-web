@@ -172,7 +172,7 @@ input {
 
 
 /* ==================================================
-   ÜBUNGSFELDER
+   ÜBUNGSFELDER STARTSEITE
 ================================================== */
 
 .exercise-list {
@@ -190,7 +190,7 @@ input {
 
   width: 100%;
 
-  height: 58px;
+  height: 62px;
 
   display: flex;
 
@@ -199,10 +199,10 @@ input {
   gap: 12px;
 
   padding:
-    6px 8px 6px 14px;
+    7px 9px 7px 14px;
 
   background:
-    rgba(255,255,255,0.8);
+    rgba(255,255,255,0.82);
 
   border-radius: 16px;
 
@@ -214,13 +214,13 @@ input {
 
 .exercise-symbol {
 
-  width: 38px;
+  width: 40px;
 
   flex-shrink: 0;
 
   text-align: center;
 
-  font-size: 30px;
+  font-size: 31px;
 
   line-height: 1;
 
@@ -233,10 +233,10 @@ input {
 
   flex: 1;
 
-  height: 44px;
+  height: 48px;
 
   padding:
-    0 13px;
+    0 14px;
 
   border: none;
 
@@ -248,7 +248,7 @@ input {
 
   color: #111111;
 
-  font-size: 16px;
+  font-size: 17px;
 
   -webkit-appearance: none;
 
@@ -270,19 +270,19 @@ input {
 
   width: 100%;
 
-  height: 50px;
+  height: 52px;
 
   margin-top: 24px;
 
   border: none;
 
-  border-radius: 25px;
+  border-radius: 26px;
 
   background: #111111;
 
   color: #ffffff;
 
-  font-size: 16px;
+  font-size: 17px;
 
   font-weight: 600;
 
@@ -323,8 +323,8 @@ input {
 
   padding:
     calc(env(safe-area-inset-top) + 8px)
-    10px
-    calc(env(safe-area-inset-bottom) + 5px);
+    12px
+    calc(env(safe-area-inset-bottom) + 8px);
 
   overflow: hidden;
 
@@ -337,14 +337,32 @@ input {
 
 .card-area {
 
+  /*
+     Großes, aber kompaktes Kartenformat.
+
+     Auf dem iPhone 15:
+     ungefähr 285 × 356 px
+  */
+
   width: min(
-    250px,
-    calc(100vw - 40px)
+
+    285px,
+
+    calc(100vw - 30px)
+
   );
 
-  height: 313px;
+  height: min(
 
-  flex-shrink: 0;
+    356px,
+
+    calc(100dvh - 305px)
+
+  );
+
+  aspect-ratio: 0.80;
+
+  flex-shrink: 1;
 
   perspective: 1000px;
 
@@ -352,6 +370,10 @@ input {
 
 }
 
+
+/* ==================================================
+   KARTE
+================================================== */
 
 .card {
 
@@ -363,13 +385,17 @@ input {
 
   background: #ffffff;
 
-  border-radius: 16px;
+  border-radius: 18px;
 
   overflow: hidden;
 
   box-shadow:
-    0 14px 30px rgba(0,0,0,0.16),
-    0 3px 7px rgba(0,0,0,0.08);
+
+    0 16px 34px
+    rgba(0,0,0,0.17),
+
+    0 4px 8px
+    rgba(0,0,0,0.08);
 
   transform-style: preserve-3d;
 
@@ -387,6 +413,7 @@ input {
   inset: 0;
 
   background:
+
     repeating-linear-gradient(
 
       135deg,
@@ -415,7 +442,7 @@ input {
 
   inset: 5%;
 
-  border-radius: 12px;
+  border-radius: 13px;
 
   border:
     2px solid
@@ -442,11 +469,11 @@ input {
 
   inset: 8%;
 
-  border-radius: 9px;
+  border-radius: 10px;
 
   border:
     1px solid
-    rgba(255,255,255,0.75);
+    rgba(255,255,255,0.8);
 
 }
 
@@ -463,7 +490,7 @@ input {
 
   background: #ffffff;
 
-  border-radius: 16px;
+  border-radius: 18px;
 
   border:
     1px solid
@@ -484,7 +511,7 @@ input {
 
 .card-value {
 
-  font-size: 112px;
+  font-size: 120px;
 
   line-height: 1;
 
@@ -493,7 +520,7 @@ input {
   letter-spacing: -6px;
 
   transform:
-    translateY(-12%);
+    translateY(-11%);
 
 }
 
@@ -510,11 +537,11 @@ input {
 
   right: 0;
 
-  top: 57%;
+  top: 58%;
 
   text-align: center;
 
-  font-size: 38px;
+  font-size: 40px;
 
   line-height: 1;
 
@@ -529,9 +556,9 @@ input {
 
   position: absolute;
 
-  width: 16%;
+  width: 17%;
 
-  font-size: 20px;
+  font-size: 21px;
 
   font-weight: 500;
 
@@ -634,17 +661,17 @@ input {
 
   margin-top: 8px;
 
-  height: 32px;
+  height: 34px;
 
-  min-width: 135px;
+  min-width: 145px;
 
   padding:
-    0 15px;
+    0 17px;
 
-  border-radius: 16px;
+  border-radius: 17px;
 
   background:
-    rgba(255,255,255,0.75);
+    rgba(255,255,255,0.78);
 
   color: #111111;
 
@@ -654,7 +681,7 @@ input {
 
   justify-content: center;
 
-  font-size: 13px;
+  font-size: 14px;
 
   font-weight: 500;
 
@@ -672,22 +699,22 @@ input {
 
 .shuffle {
 
-  margin-top: 5px;
+  margin-top: 6px;
 
-  height: 36px;
+  height: 40px;
 
   padding:
-    0 20px;
+    0 23px;
 
   border: none;
 
-  border-radius: 18px;
+  border-radius: 20px;
 
   background: #111111;
 
   color: #ffffff;
 
-  font-size: 13px;
+  font-size: 14px;
 
   font-weight: 500;
 
@@ -716,18 +743,21 @@ input {
 .legend {
 
   width: min(
-    360px,
-    calc(100vw - 28px)
+
+    390px,
+
+    calc(100vw - 24px)
+
   );
 
-  margin-top: 7px;
+  margin-top: 10px;
 
   display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 5px 7px;
+  gap: 7px 8px;
 
   flex-shrink: 0;
 
@@ -738,38 +768,41 @@ input {
 
   min-width: 0;
 
-  height: 28px;
+  height: 36px;
 
   display: flex;
 
   align-items: center;
 
-  gap: 5px;
+  gap: 7px;
 
   padding:
-    2px 7px;
+    3px 9px;
 
-  border-radius: 9px;
+  border-radius: 11px;
 
   background:
-    rgba(255,255,255,0.65);
+    rgba(255,255,255,0.72);
 
-  font-size: 11px;
+  font-size: 13px;
 
   color: #222222;
+
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.04);
 
 }
 
 
 .legend-symbol {
 
-  width: 18px;
+  width: 21px;
 
   flex-shrink: 0;
 
   text-align: center;
 
-  font-size: 16px;
+  font-size: 19px;
 
   line-height: 1;
 
@@ -795,10 +828,10 @@ input {
 
 .change-exercises {
 
-  margin-top: 4px;
+  margin-top: 5px;
 
   padding:
-    2px 8px;
+    2px 10px;
 
   border: none;
 
@@ -806,25 +839,82 @@ input {
 
   color: #555555;
 
-  font-size: 11px;
+  font-size: 12px;
 
 }
 
 
 /* ==================================================
-   KLEINE BILDSCHIRME
+   iPHONE 15 / KLEINERE HÖHE
 ================================================== */
 
-@media (max-height: 700px) {
+@media (max-height: 750px) {
+
+  .game-screen {
+
+    padding-top:
+      calc(env(safe-area-inset-top) + 5px);
+
+  }
+
 
   .card-area {
 
     width: min(
-      235px,
-      calc(100vw - 45px)
+
+      275px,
+
+      calc(100vw - 32px)
+
     );
 
-    height: 294px;
+    height: min(
+
+      344px,
+
+      calc(100dvh - 295px)
+
+    );
+
+  }
+
+
+  .card-value {
+
+    font-size: 116px;
+
+  }
+
+
+  .card-suit {
+
+    font-size: 38px;
+
+  }
+
+
+  .legend-item {
+
+    height: 34px;
+
+    font-size: 12px;
+
+  }
+
+}
+
+
+/* ==================================================
+   SEHR KLEINE DISPLAYS
+================================================== */
+
+@media (max-height: 650px) {
+
+  .card-area {
+
+    width: 245px;
+
+    height: 306px;
 
   }
 
@@ -838,14 +928,18 @@ input {
 
   .card-suit {
 
-    font-size: 36px;
+    font-size: 35px;
 
   }
 
 
   .remaining {
 
-    margin-top: 6px;
+    margin-top: 5px;
+
+    height: 30px;
+
+    font-size: 13px;
 
   }
 
@@ -854,59 +948,34 @@ input {
 
     margin-top: 4px;
 
+    height: 36px;
+
+    font-size: 13px;
+
   }
 
 
   .legend {
 
-    margin-top: 5px;
+    margin-top: 6px;
 
-  }
-
-}
-
-
-/* ==================================================
-   SEHR KLEINE BILDSCHIRME
-================================================== */
-
-@media (max-height: 620px) {
-
-  .card-area {
-
-    width: 210px;
-
-    height: 263px;
-
-  }
-
-
-  .card-value {
-
-    font-size: 94px;
-
-  }
-
-
-  .card-suit {
-
-    font-size: 32px;
-
-  }
-
-
-  .corner {
-
-    font-size: 18px;
+    gap: 4px 6px;
 
   }
 
 
   .legend-item {
 
-    height: 25px;
+    height: 30px;
 
-    font-size: 10px;
+    font-size: 11px;
+
+  }
+
+
+  .legend-symbol {
+
+    font-size: 16px;
 
   }
 
@@ -1225,7 +1294,7 @@ function shuffleDeck() {
 
 
 /* ==================================================
-   RESTKARTEN ANZEIGEN
+   RESTKARTEN
 ================================================== */
 
 function updateRemaining() {
@@ -1345,7 +1414,7 @@ function showCard(data) {
 
 
 /* ==================================================
-   LEGENDE AKTUALISIEREN
+   LEGENDE
 ================================================== */
 
 function updateLegend() {
