@@ -358,6 +358,55 @@ input {
 
 
 /* ==================================================
+   STOPPUHR
+================================================== */
+
+.timer {
+
+  margin-bottom: 10px;
+
+  height: 34px;
+
+  min-width: 108px;
+
+  padding:
+    0 18px;
+
+  border-radius: 17px;
+
+  background: rgba(17,17,17,0.9);
+
+  color: #ffffff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-family:
+    ui-monospace,
+    "SF Mono",
+    "Menlo",
+    monospace;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  font-variant-numeric: tabular-nums;
+
+  box-shadow:
+    0 3px 9px rgba(0,0,0,0.1);
+
+  flex-shrink: 0;
+
+}
+
+
+/* ==================================================
    KARTE
 ================================================== */
 
@@ -873,6 +922,15 @@ input {
   }
 
 
+  .timer {
+
+    height: 32px;
+
+    font-size: 16px;
+
+  }
+
+
   .card-area {
 
     width: min(
@@ -924,6 +982,17 @@ input {
 ================================================== */
 
 @media (max-height: 650px) {
+
+  .timer {
+
+    margin-bottom: 6px;
+
+    height: 28px;
+
+    font-size: 14px;
+
+  }
+
 
   .card-area {
 
@@ -1129,6 +1198,15 @@ input {
 
 
   <div
+    class="timer"
+    id="timer"
+    aria-live="polite"
+  >
+    00:00
+  </div>
+
+
+  <div
     class="card-area"
     id="cardArea"
     aria-label="Karte aufdecken"
@@ -1240,6 +1318,103 @@ let deck = [];
 let currentIndex = 0;
 
 let exercises = {};
+
+
+/* ==================================================
+   STOPPUHR
+================================================== */
+
+let timerInterval = null;
+
+let elapsedSeconds = 0;
+
+let timerStarted = false;
+
+
+const MAX_TIMER_SECONDS = 59 * 60 + 59;
+
+
+function updateTimerDisplay() {
+
+  const minutes =
+    Math.floor(elapsedSeconds / 60);
+
+  const seconds =
+    elapsedSeconds % 60;
+
+
+  const mm =
+    String(minutes).padStart(2, "0");
+
+  const ss =
+    String(seconds).padStart(2, "0");
+
+
+  document
+    .getElementById("timer")
+    .textContent =
+      `${mm}:${ss}`;
+
+}
+
+
+function startTimer() {
+
+  if (timerInterval) {
+
+    return;
+
+  }
+
+
+  timerInterval =
+    setInterval(() => {
+
+      if (
+        elapsedSeconds >=
+        MAX_TIMER_SECONDS
+      ) {
+
+        stopTimer();
+
+        return;
+
+      }
+
+
+      elapsedSeconds++;
+
+      updateTimerDisplay();
+
+    }, 1000);
+
+}
+
+
+function stopTimer() {
+
+  if (timerInterval) {
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
+  }
+
+}
+
+
+function resetTimer() {
+
+  stopTimer();
+
+  elapsedSeconds = 0;
+
+  timerStarted = false;
+
+  updateTimerDisplay();
+
+}
 
 
 /* ==================================================
@@ -1606,6 +1781,8 @@ function resetDeck() {
 
   updateRemaining();
 
+  resetTimer();
+
 }
 
 
@@ -1620,6 +1797,15 @@ function drawCard() {
   ) {
 
     return;
+
+  }
+
+
+  if (!timerStarted) {
+
+    timerStarted = true;
+
+    startTimer();
 
   }
 
