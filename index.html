@@ -16,7 +16,27 @@
 
 <title>Kartenstapel</title>
 
-<link rel="apple-touch-icon" href="icon-180.png">
+
+<!-- ==================================================
+     IOS / SAFARI ICON
+================================================== -->
+
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="./icon-180.png"
+>
+
+
+<!-- ==================================================
+     WEB APP MANIFEST
+================================================== -->
+
+<link
+  rel="manifest"
+  href="./manifest.json"
+>
+
 
 <meta
   name="apple-mobile-web-app-title"
@@ -25,6 +45,11 @@
 
 <meta
   name="apple-mobile-web-app-capable"
+  content="yes"
+>
+
+<meta
+  name="mobile-web-app-capable"
   content="yes"
 >
 
@@ -168,7 +193,7 @@ input {
 
 
 /* ==================================================
-   ÜBUNGSFELDER STARTSEITE
+   ÜBUNGSFELDER
 ================================================== */
 
 .exercise-list {
@@ -333,13 +358,6 @@ input {
 
 .card-area {
 
-  /*
-     Großes, aber kompaktes Kartenformat.
-
-     Auf dem iPhone 15:
-     ungefähr 285 × 356 px
-  */
-
   width: min(
 
     285px,
@@ -366,10 +384,6 @@ input {
 
 }
 
-
-/* ==================================================
-   KARTE
-================================================== */
 
 .card {
 
@@ -841,7 +855,7 @@ input {
 
 
 /* ==================================================
-   iPHONE 15 / KLEINERE HÖHE
+   KLEINERE BILDSCHIRME
 ================================================== */
 
 @media (max-height: 750px) {
