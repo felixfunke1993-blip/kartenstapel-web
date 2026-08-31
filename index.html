@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -13,20 +14,34 @@
 >
 
 <title>Kartenstapel</title>
-  
-<!-- iPhone Home-Bildschirm -->
-<link rel="apple-touch-icon" href="icon-180.png">
 
-<!-- Web-App Name -->
-<meta name="apple-mobile-web-app-title" content="Kartenstapel">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  
+<!-- iPhone Home-Bildschirm -->
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="./icon-180.png"
+>
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="Kartenstapel"
+>
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes"
+>
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent"
+>
+
+
 <style>
 
 /* ==================================================
-   KARTENSTAPEL – VERSION 4.0
-   Große Karte + Kartenrücken + Restkartenanzeige
+   KARTENSTAPEL – VERSION 5.0
 ================================================== */
 
 :root {
@@ -35,6 +50,7 @@
   --text: #111111;
   --red: #d62828;
 }
+
 
 /* --------------------------------------------------
    Grundlayout
@@ -47,8 +63,10 @@
 
 html,
 body {
+
   width: 100%;
   height: 100%;
+
   margin: 0;
   padding: 0;
 }
@@ -74,8 +92,9 @@ body {
   -webkit-user-select: none;
 }
 
+
 /* --------------------------------------------------
-   App
+   Gemeinsames App-Layout
 -------------------------------------------------- */
 
 .app {
@@ -98,6 +117,200 @@ body {
   justify-content: center;
 }
 
+
+/* ==================================================
+   STARTSEITE – LEGENDEN
+================================================== */
+
+.setup {
+
+  width: min(90vw, 420px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+/* Überschrift */
+
+.setup-title {
+
+  margin: 0 0 8px 0;
+
+  font-size: 28px;
+
+  font-weight: 600;
+
+  color: #111111;
+}
+
+
+/* Untertitel */
+
+.setup-subtitle {
+
+  margin: 0 0 28px 0;
+
+  font-size: 15px;
+
+  color: #555555;
+
+  text-align: center;
+}
+
+
+/* --------------------------------------------------
+   Übungszeilen
+-------------------------------------------------- */
+
+.exercise-list {
+
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
+.exercise-row {
+
+  width: 100%;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 6px 8px 6px 14px;
+
+  background: rgba(255,255,255,0.78);
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.07);
+}
+
+
+/* Symbol */
+
+.exercise-symbol {
+
+  width: 38px;
+
+  flex-shrink: 0;
+
+  text-align: center;
+
+  font-size: 30px;
+
+  line-height: 1;
+}
+
+
+/* Eingabefeld */
+
+.exercise-input {
+
+  width: 100%;
+
+  height: 44px;
+
+  border: none;
+
+  outline: none;
+
+  border-radius: 12px;
+
+  padding: 0 13px;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  -webkit-appearance: none;
+}
+
+
+.exercise-input::placeholder {
+
+  color: #999999;
+}
+
+
+/* --------------------------------------------------
+   Startbutton
+-------------------------------------------------- */
+
+.start-button {
+
+  margin-top: 24px;
+
+  width: 100%;
+
+  height: 48px;
+
+  border: none;
+
+  border-radius: 24px;
+
+  background: #111111;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,0.14);
+}
+
+
+.start-button:active {
+
+  transform: scale(0.97);
+
+  opacity: 0.8;
+}
+
+
+/* ==================================================
+   SPIELSEITE
+================================================== */
+
+.game {
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
 /* --------------------------------------------------
    Karte
 -------------------------------------------------- */
@@ -105,6 +318,7 @@ body {
 .card-area {
 
   width: min(380px, calc(100vw - 14px));
+
   aspect-ratio: 2 / 3;
 
   flex-shrink: 0;
@@ -113,6 +327,7 @@ body {
 
   cursor: pointer;
 }
+
 
 .card {
 
@@ -133,6 +348,7 @@ body {
 
   transform-style: preserve-3d;
 }
+
 
 /* --------------------------------------------------
    Kartenrückseite
@@ -156,15 +372,8 @@ body {
     );
 
   border: 3px solid #111111;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
 }
 
-/* Innerer Kartenrahmen */
 
 .card-back::before {
 
@@ -183,7 +392,6 @@ body {
     inset 0 0 0 4px rgba(255,255,255,0.8);
 }
 
-/* Zweiter feiner Rahmen */
 
 .card-back::after {
 
@@ -197,6 +405,7 @@ body {
 
   border: 1px solid rgba(255,255,255,0.75);
 }
+
 
 /* --------------------------------------------------
    Kartenvorderseite
@@ -221,8 +430,9 @@ body {
   justify-content: center;
 }
 
+
 /* --------------------------------------------------
-   Große Kartenzahl
+   Kartenzahl
 -------------------------------------------------- */
 
 .card-value {
@@ -237,6 +447,7 @@ body {
 
   transform: translateY(-38px);
 }
+
 
 /* --------------------------------------------------
    Mittleres Symbol
@@ -253,13 +464,16 @@ body {
   line-height: 1;
 }
 
+
 /* --------------------------------------------------
-   Ecken
+   Kartenecken
 -------------------------------------------------- */
 
 .corner {
 
   position: absolute;
+
+  width: 42px;
 
   font-size: 29px;
 
@@ -270,11 +484,8 @@ body {
   text-align: center;
 
   letter-spacing: -0.7px;
-
-  width: 42px;
 }
 
-/* Oben links */
 
 .corner.top {
 
@@ -283,7 +494,6 @@ body {
   left: 24px;
 }
 
-/* Unten rechts */
 
 .corner.bottom {
 
@@ -293,6 +503,7 @@ body {
 
   transform: rotate(180deg);
 }
+
 
 /* --------------------------------------------------
    Farben
@@ -306,6 +517,7 @@ body {
   color: var(--text);
 }
 
+
 /* --------------------------------------------------
    Animation
 -------------------------------------------------- */
@@ -317,6 +529,7 @@ body {
     0.40s
     cubic-bezier(.2,.8,.2,1);
 }
+
 
 @keyframes flipCard {
 
@@ -346,8 +559,9 @@ body {
 
 }
 
+
 /* --------------------------------------------------
-   Restkartenanzeige
+   Restkarten
 -------------------------------------------------- */
 
 .remaining {
@@ -382,8 +596,9 @@ body {
   flex-shrink: 0;
 }
 
+
 /* --------------------------------------------------
-   Misch-Button
+   Mischbutton
 -------------------------------------------------- */
 
 .shuffle {
@@ -392,8 +607,7 @@ body {
 
   height: 42px;
 
-  padding:
-    0 22px;
+  padding: 0 22px;
 
   border: none;
 
@@ -415,11 +629,8 @@ body {
 
   box-shadow:
     0 4px 10px rgba(0,0,0,0.12);
-
-  transition:
-    transform 0.12s ease,
-    opacity 0.12s ease;
 }
+
 
 .shuffle:active {
 
@@ -428,11 +639,100 @@ body {
   opacity: 0.75;
 }
 
+
+/* ==================================================
+   LEGENDE UNTER DER KARTE
+================================================== */
+
+.legend {
+
+  width: min(380px, calc(100vw - 28px));
+
+  margin-top: 15px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 7px 10px;
+
+  flex-shrink: 0;
+}
+
+
+.legend-item {
+
+  min-height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 5px 9px;
+
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.65);
+
+  font-size: 13px;
+
+  color: #222222;
+}
+
+
+.legend-symbol {
+
+  width: 22px;
+
+  flex-shrink: 0;
+
+  text-align: center;
+
+  font-size: 19px;
+
+  line-height: 1;
+}
+
+
+.legend-text {
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
 /* --------------------------------------------------
-   Kleinere Displays
+   Übungen ändern
 -------------------------------------------------- */
 
-@media (max-height: 760px) {
+.change-exercises {
+
+  margin-top: 10px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #555555;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+
+/* ==================================================
+   KLEINERE DISPLAYS
+================================================== */
+
+@media (max-height: 800px) {
 
   .card-area {
 
@@ -462,63 +762,86 @@ body {
 
   }
 
-  .remaining {
+  .legend {
 
-    margin-top: 12px;
+    margin-top: 10px;
 
   }
 
 }
 
+
 /* --------------------------------------------------
    Sehr kleine Displays
 -------------------------------------------------- */
 
-@media (max-height: 650px) {
+@media (max-height: 680px) {
 
   .card-area {
 
-    width: min(285px, calc(100vw - 24px));
+    width: min(280px, calc(100vw - 24px));
 
   }
 
   .card-value {
 
-    font-size: 125px;
+    font-size: 120px;
 
-    transform: translateY(-27px);
+    transform: translateY(-25px);
 
   }
 
   .card-suit {
 
-    top: 245px;
+    top: 235px;
 
-    font-size: 42px;
+    font-size: 40px;
 
   }
 
   .corner {
 
-    font-size: 22px;
+    font-size: 21px;
 
   }
 
   .remaining {
 
-    height: 34px;
+    height: 32px;
 
-    margin-top: 9px;
-
-    font-size: 14px;
+    margin-top: 7px;
 
   }
 
   .shuffle {
 
-    height: 38px;
+    height: 36px;
 
-    margin-top: 8px;
+    margin-top: 6px;
+
+  }
+
+  .legend {
+
+    margin-top: 7px;
+
+    gap: 4px 7px;
+
+  }
+
+  .legend-item {
+
+    min-height: 29px;
+
+    padding: 3px 6px;
+
+    font-size: 11px;
+
+  }
+
+  .change-exercises {
+
+    margin-top: 5px;
 
   }
 
@@ -530,7 +853,132 @@ body {
 
 <body>
 
-<main class="app">
+
+<!-- ==================================================
+     STARTSEITE
+================================================== -->
+
+<main
+  class="app"
+  id="setupScreen"
+>
+
+  <section class="setup">
+
+    <h1 class="setup-title">
+      Kartenstapel
+    </h1>
+
+    <p class="setup-subtitle">
+      Ordne jedem Symbol eine Sportübung zu.
+    </p>
+
+
+    <div class="exercise-list">
+
+
+      <!-- ♠ -->
+
+      <div class="exercise-row">
+
+        <div class="exercise-symbol black">
+          ♠
+        </div>
+
+        <input
+          class="exercise-input"
+          id="exercise-spades"
+          type="text"
+          placeholder="z. B. Liegestütze"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- ♥ -->
+
+      <div class="exercise-row">
+
+        <div class="exercise-symbol red">
+          ♥
+        </div>
+
+        <input
+          class="exercise-input"
+          id="exercise-hearts"
+          type="text"
+          placeholder="z. B. Kniebeugen"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- ♦ -->
+
+      <div class="exercise-row">
+
+        <div class="exercise-symbol red">
+          ♦
+        </div>
+
+        <input
+          class="exercise-input"
+          id="exercise-diamonds"
+          type="text"
+          placeholder="z. B. Sit-ups"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- ♣ -->
+
+      <div class="exercise-row">
+
+        <div class="exercise-symbol black">
+          ♣
+        </div>
+
+        <input
+          class="exercise-input"
+          id="exercise-clubs"
+          type="text"
+          placeholder="z. B. Burpees"
+          autocomplete="off"
+        >
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="start-button"
+      id="startButton"
+      type="button"
+    >
+      Training starten
+    </button>
+
+  </section>
+
+</main>
+
+
+<!-- ==================================================
+     SPIELSEITE
+================================================== -->
+
+<main
+  class="game"
+  id="gameScreen"
+>
+
+
+  <!-- Karte -->
 
   <div
     class="card-area"
@@ -560,7 +1008,7 @@ body {
   </div>
 
 
-  <!-- Mischen -->
+  <!-- Neu mischen -->
 
   <button
     class="shuffle"
@@ -570,35 +1018,58 @@ body {
     Neu mischen
   </button>
 
+
+  <!-- Legende -->
+
+  <div
+    class="legend"
+    id="legend"
+  ></div>
+
+
+  <!-- Übungen ändern -->
+
+  <button
+    class="change-exercises"
+    id="changeExercises"
+    type="button"
+  >
+    Übungen ändern
+  </button>
+
 </main>
 
 
 <script>
 
 /* ==================================================
-   KARTENSTAPEL
+   KARTEN
 ================================================== */
 
 const suits = [
 
   {
     symbol: "♠",
-    color: "black"
+    color: "black",
+    key: "spades"
   },
 
   {
     symbol: "♥",
-    color: "red"
+    color: "red",
+    key: "hearts"
   },
 
   {
     symbol: "♦",
-    color: "red"
+    color: "red",
+    key: "diamonds"
   },
 
   {
     symbol: "♣",
-    color: "black"
+    color: "black",
+    key: "clubs"
   }
 
 ];
@@ -627,10 +1098,12 @@ let deck = [];
 
 let currentIndex = 0;
 
+let exercises = {};
 
-/* --------------------------------------------------
-   Stapel erstellen
--------------------------------------------------- */
+
+/* ==================================================
+   STAPEL ERSTELLEN
+================================================== */
 
 function createDeck() {
 
@@ -646,7 +1119,9 @@ function createDeck() {
 
         symbol: suit.symbol,
 
-        color: suit.color
+        color: suit.color,
+
+        key: suit.key
 
       });
 
@@ -657,9 +1132,9 @@ function createDeck() {
 }
 
 
-/* --------------------------------------------------
-   Mischen
--------------------------------------------------- */
+/* ==================================================
+   MISCHEN
+================================================== */
 
 function shuffleDeck() {
 
@@ -687,9 +1162,9 @@ function shuffleDeck() {
 }
 
 
-/* --------------------------------------------------
-   Restkarten anzeigen
--------------------------------------------------- */
+/* ==================================================
+   RESTKARTEN
+================================================== */
 
 function updateRemaining() {
 
@@ -704,9 +1179,9 @@ function updateRemaining() {
 }
 
 
-/* --------------------------------------------------
-   Rückseite
--------------------------------------------------- */
+/* ==================================================
+   KARTENRÜCKSEITE
+================================================== */
 
 function showBack() {
 
@@ -720,9 +1195,9 @@ function showBack() {
 }
 
 
-/* --------------------------------------------------
-   Karte anzeigen
--------------------------------------------------- */
+/* ==================================================
+   KARTE ANZEIGEN
+================================================== */
 
 function showCard(data) {
 
@@ -781,9 +1256,156 @@ function showCard(data) {
 }
 
 
-/* --------------------------------------------------
-   Neu starten
--------------------------------------------------- */
+/* ==================================================
+   LEGENDE AKTUALISIEREN
+================================================== */
+
+function updateLegend() {
+
+  const legend =
+    document.getElementById("legend");
+
+  legend.innerHTML = "";
+
+
+  for (const suit of suits) {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "legend-item";
+
+
+    const symbol =
+      document.createElement("div");
+
+    symbol.className =
+      `legend-symbol ${suit.color}`;
+
+    symbol.textContent =
+      suit.symbol;
+
+
+    const text =
+      document.createElement("div");
+
+    text.className =
+      "legend-text";
+
+    text.textContent =
+      exercises[suit.key] ||
+      "Keine Übung";
+
+
+    item.appendChild(symbol);
+
+    item.appendChild(text);
+
+    legend.appendChild(item);
+
+  }
+
+}
+
+
+/* ==================================================
+   TRAINING STARTEN
+================================================== */
+
+function startTraining() {
+
+  exercises = {
+
+    spades:
+      document
+        .getElementById("exercise-spades")
+        .value
+        .trim(),
+
+    hearts:
+      document
+        .getElementById("exercise-hearts")
+        .value
+        .trim(),
+
+    diamonds:
+      document
+        .getElementById("exercise-diamonds")
+        .value
+        .trim(),
+
+    clubs:
+      document
+        .getElementById("exercise-clubs")
+        .value
+        .trim()
+
+  };
+
+
+  document
+    .getElementById("setupScreen")
+    .style.display = "none";
+
+
+  document
+    .getElementById("gameScreen")
+    .style.display = "flex";
+
+
+  resetDeck();
+
+  updateLegend();
+
+}
+
+
+/* ==================================================
+   ÜBUNGEN ÄNDERN
+================================================== */
+
+function changeExercises() {
+
+  document
+    .getElementById("setupScreen")
+    .style.display = "flex";
+
+
+  document
+    .getElementById("gameScreen")
+    .style.display = "none";
+
+
+  document
+    .getElementById("exercise-spades")
+    .value =
+      exercises.spades || "";
+
+
+  document
+    .getElementById("exercise-hearts")
+    .value =
+      exercises.hearts || "";
+
+
+  document
+    .getElementById("exercise-diamonds")
+    .value =
+      exercises.diamonds || "";
+
+
+  document
+    .getElementById("exercise-clubs")
+    .value =
+      exercises.clubs || "";
+
+}
+
+
+/* ==================================================
+   NEU STARTEN
+================================================== */
 
 function resetDeck() {
 
@@ -800,9 +1422,9 @@ function resetDeck() {
 }
 
 
-/* --------------------------------------------------
-   Karte ziehen
--------------------------------------------------- */
+/* ==================================================
+   KARTE ZIEHEN
+================================================== */
 
 function drawCard() {
 
@@ -841,9 +1463,25 @@ function drawCard() {
 }
 
 
-/* --------------------------------------------------
-   Events
--------------------------------------------------- */
+/* ==================================================
+   EVENTS
+================================================== */
+
+document
+  .getElementById("startButton")
+  .addEventListener(
+    "click",
+    startTraining
+  );
+
+
+document
+  .getElementById("changeExercises")
+  .addEventListener(
+    "click",
+    changeExercises
+  );
+
 
 document
   .getElementById("cardArea")
@@ -860,14 +1498,8 @@ document
     resetDeck
   );
 
-
-/* --------------------------------------------------
-   Start
--------------------------------------------------- */
-
-resetDeck();
-
 </script>
 
 </body>
 </html>
+```
