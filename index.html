@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -15,7 +16,10 @@
 
 <title>Kartenstapel</title>
 
-<!-- iPhone Home-Bildschirm -->
+<!-- ==================================================
+     iPHONE HOME-BILDSCHIRM
+================================================== -->
+
 <link
   rel="apple-touch-icon"
   sizes="180x180"
@@ -41,39 +45,43 @@
 <style>
 
 /* ==================================================
-   KARTENSTAPEL – VERSION 5.0
+   KARTENSTAPEL
 ================================================== */
 
 :root {
+
   --background: #d1d1d6;
-  --card: #ffffff;
-  --text: #111111;
+
   --red: #d62828;
+
+  --black: #111111;
+
 }
 
 
-/* --------------------------------------------------
-   Grundlayout
--------------------------------------------------- */
+/* ==================================================
+   GRUNDLAYOUT
+================================================== */
 
 * {
+
   box-sizing: border-box;
+
   -webkit-tap-highlight-color: transparent;
+
 }
+
 
 html,
 body {
 
   width: 100%;
+
   height: 100%;
 
   margin: 0;
+
   padding: 0;
-}
-
-body {
-
-  min-height: 100dvh;
 
   overflow: hidden;
 
@@ -89,92 +97,102 @@ body {
     sans-serif;
 
   user-select: none;
+
   -webkit-user-select: none;
+
 }
 
 
-/* --------------------------------------------------
-   Gemeinsames App-Layout
--------------------------------------------------- */
+button,
+input {
 
-.app {
+  font-family: inherit;
 
-  width: 100%;
-  height: 100dvh;
-
-  padding-top:
-    env(safe-area-inset-top);
-
-  padding-bottom:
-    env(safe-area-inset-bottom);
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
 }
 
 
 /* ==================================================
-   STARTSEITE – LEGENDEN
+   STARTSEITE
 ================================================== */
 
-.setup {
+.setup-screen {
 
-  width: min(90vw, 420px);
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100dvh;
+
+  padding:
+    calc(env(safe-area-inset-top) + 20px)
+    20px
+    calc(env(safe-area-inset-bottom) + 20px);
 
   display: flex;
 
-  flex-direction: column;
-
   align-items: center;
+
+  justify-content: center;
+
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
+
 }
 
 
-/* Überschrift */
+.setup {
+
+  width: 100%;
+
+  max-width: 420px;
+
+}
+
 
 .setup-title {
 
-  margin: 0 0 8px 0;
+  margin: 0;
 
-  font-size: 28px;
+  text-align: center;
 
-  font-weight: 600;
+  font-size: 30px;
+
+  font-weight: 650;
 
   color: #111111;
+
 }
 
 
-/* Untertitel */
-
 .setup-subtitle {
 
-  margin: 0 0 28px 0;
+  margin:
+    8px 0 25px;
+
+  text-align: center;
 
   font-size: 15px;
 
   color: #555555;
 
-  text-align: center;
 }
 
 
-/* --------------------------------------------------
-   Übungszeilen
--------------------------------------------------- */
+/* ==================================================
+   ÜBUNGSFELDER
+================================================== */
 
 .exercise-list {
-
-  width: 100%;
 
   display: flex;
 
   flex-direction: column;
 
   gap: 12px;
+
 }
 
 
@@ -188,20 +206,21 @@ body {
 
   align-items: center;
 
-  gap: 14px;
+  gap: 12px;
 
-  padding: 6px 8px 6px 14px;
+  padding:
+    6px 8px 6px 14px;
 
-  background: rgba(255,255,255,0.78);
+  background:
+    rgba(255,255,255,0.8);
 
   border-radius: 16px;
 
   box-shadow:
     0 3px 10px rgba(0,0,0,0.07);
+
 }
 
-
-/* Symbol */
 
 .exercise-symbol {
 
@@ -214,16 +233,20 @@ body {
   font-size: 30px;
 
   line-height: 1;
+
 }
 
 
-/* Eingabefeld */
-
 .exercise-input {
 
-  width: 100%;
+  min-width: 0;
+
+  flex: 1;
 
   height: 44px;
+
+  padding:
+    0 13px;
 
   border: none;
 
@@ -231,56 +254,51 @@ body {
 
   border-radius: 12px;
 
-  padding: 0 13px;
-
   background: #ffffff;
 
   color: #111111;
 
-  font-family: inherit;
-
   font-size: 16px;
 
   -webkit-appearance: none;
+
 }
 
 
 .exercise-input::placeholder {
 
   color: #999999;
+
 }
 
 
-/* --------------------------------------------------
-   Startbutton
--------------------------------------------------- */
+/* ==================================================
+   STARTBUTTON
+================================================== */
 
 .start-button {
 
-  margin-top: 24px;
-
   width: 100%;
 
-  height: 48px;
+  height: 50px;
+
+  margin-top: 24px;
 
   border: none;
 
-  border-radius: 24px;
+  border-radius: 25px;
 
   background: #111111;
 
   color: #ffffff;
 
-  font-family: inherit;
-
   font-size: 16px;
 
   font-weight: 600;
 
-  cursor: pointer;
-
   box-shadow:
     0 5px 14px rgba(0,0,0,0.14);
+
 }
 
 
@@ -288,7 +306,6 @@ body {
 
   transform: scale(0.97);
 
-  opacity: 0.8;
 }
 
 
@@ -296,10 +313,15 @@ body {
    SPIELSEITE
 ================================================== */
 
-.game {
+.game-screen {
+
+  position: fixed;
+
+  inset: 0;
 
   width: 100%;
-  height: 100%;
+
+  height: 100dvh;
 
   display: none;
 
@@ -307,17 +329,40 @@ body {
 
   align-items: center;
 
-  justify-content: center;
+  justify-content: flex-start;
+
+  padding:
+    calc(env(safe-area-inset-top) + 5px)
+    7px
+    calc(env(safe-area-inset-bottom) + 5px);
+
+  overflow: hidden;
+
 }
 
 
-/* --------------------------------------------------
-   Karte
--------------------------------------------------- */
+/* ==================================================
+   KARTE
+================================================== */
 
 .card-area {
 
-  width: min(380px, calc(100vw - 14px));
+  /*
+     Die Karte wird automatisch an die
+     verfügbare Bildschirmhöhe angepasst.
+
+     380px ist die maximale Breite.
+  */
+
+  width: min(
+
+    380px,
+
+    calc(100vw - 14px),
+
+    calc((100dvh - 190px) * 0.6667)
+
+  );
 
   aspect-ratio: 2 / 3;
 
@@ -326,33 +371,36 @@ body {
   perspective: 1200px;
 
   cursor: pointer;
+
 }
 
 
 .card {
 
   width: 100%;
+
   height: 100%;
 
   position: relative;
 
-  background: white;
+  overflow: hidden;
+
+  background: #ffffff;
 
   border-radius: 21px;
-
-  overflow: hidden;
 
   box-shadow:
     0 20px 40px rgba(0,0,0,0.18),
     0 4px 9px rgba(0,0,0,0.09);
 
   transform-style: preserve-3d;
+
 }
 
 
-/* --------------------------------------------------
-   Kartenrückseite
--------------------------------------------------- */
+/* ==================================================
+   KARTENRÜCKSEITE
+================================================== */
 
 .card-back {
 
@@ -362,16 +410,22 @@ body {
 
   background:
     repeating-linear-gradient(
+
       135deg,
+
       #111111 0px,
       #111111 5px,
+
       #ffffff 5px,
       #ffffff 6px,
+
       #111111 6px,
       #111111 11px
+
     );
 
   border: 3px solid #111111;
+
 }
 
 
@@ -385,11 +439,20 @@ body {
 
   border-radius: 15px;
 
-  border: 2px solid rgba(255,255,255,0.9);
+  border:
+    2px solid
+    rgba(255,255,255,0.9);
 
   box-shadow:
-    inset 0 0 0 3px #111111,
-    inset 0 0 0 4px rgba(255,255,255,0.8);
+
+    inset
+    0 0 0 3px
+    #111111,
+
+    inset
+    0 0 0 4px
+    rgba(255,255,255,0.8);
+
 }
 
 
@@ -403,13 +466,16 @@ body {
 
   border-radius: 11px;
 
-  border: 1px solid rgba(255,255,255,0.75);
+  border:
+    1px solid
+    rgba(255,255,255,0.75);
+
 }
 
 
-/* --------------------------------------------------
-   Kartenvorderseite
--------------------------------------------------- */
+/* ==================================================
+   KARTENVORDERSEITE
+================================================== */
 
 .card-front {
 
@@ -421,19 +487,22 @@ body {
 
   border-radius: 21px;
 
-  border: 1px solid rgba(0,0,0,0.06);
+  border:
+    1px solid
+    rgba(0,0,0,0.06);
 
   display: flex;
 
   align-items: center;
 
   justify-content: center;
+
 }
 
 
-/* --------------------------------------------------
-   Kartenzahl
--------------------------------------------------- */
+/* ==================================================
+   GROSSE KARTENZAHL
+================================================== */
 
 .card-value {
 
@@ -445,13 +514,15 @@ body {
 
   letter-spacing: -8px;
 
-  transform: translateY(-38px);
+  transform:
+    translateY(-38px);
+
 }
 
 
-/* --------------------------------------------------
-   Mittleres Symbol
--------------------------------------------------- */
+/* ==================================================
+   MITTLERES SYMBOL
+================================================== */
 
 .card-suit {
 
@@ -462,12 +533,13 @@ body {
   font-size: 55px;
 
   line-height: 1;
+
 }
 
 
-/* --------------------------------------------------
-   Kartenecken
--------------------------------------------------- */
+/* ==================================================
+   ECKEN
+================================================== */
 
 .corner {
 
@@ -484,6 +556,7 @@ body {
   text-align: center;
 
   letter-spacing: -0.7px;
+
 }
 
 
@@ -492,6 +565,7 @@ body {
   top: 23px;
 
   left: 24px;
+
 }
 
 
@@ -501,26 +575,33 @@ body {
 
   bottom: 23px;
 
-  transform: rotate(180deg);
+  transform:
+    rotate(180deg);
+
 }
 
 
-/* --------------------------------------------------
-   Farben
--------------------------------------------------- */
+/* ==================================================
+   FARBEN
+================================================== */
 
 .red {
+
   color: var(--red);
+
 }
+
 
 .black {
-  color: var(--text);
+
+  color: var(--black);
+
 }
 
 
-/* --------------------------------------------------
-   Animation
--------------------------------------------------- */
+/* ==================================================
+   KARTENANIMATION
+================================================== */
 
 .flip {
 
@@ -528,6 +609,7 @@ body {
     flipCard
     0.40s
     cubic-bezier(.2,.8,.2,1);
+
 }
 
 
@@ -560,23 +642,25 @@ body {
 }
 
 
-/* --------------------------------------------------
-   Restkarten
--------------------------------------------------- */
+/* ==================================================
+   RESTKARTEN
+================================================== */
 
 .remaining {
 
-  margin-top: 15px;
+  margin-top: 7px;
 
-  min-width: 145px;
+  height: 34px;
 
-  height: 38px;
+  min-width: 140px;
 
-  padding: 0 18px;
+  padding:
+    0 17px;
 
-  border-radius: 19px;
+  border-radius: 17px;
 
-  background: rgba(255,255,255,0.72);
+  background:
+    rgba(255,255,255,0.75);
 
   color: #111111;
 
@@ -586,7 +670,7 @@ body {
 
   justify-content: center;
 
-  font-size: 15px;
+  font-size: 14px;
 
   font-weight: 500;
 
@@ -594,125 +678,146 @@ body {
     0 3px 10px rgba(0,0,0,0.08);
 
   flex-shrink: 0;
+
 }
 
 
-/* --------------------------------------------------
-   Mischbutton
--------------------------------------------------- */
+/* ==================================================
+   MISCHBUTTON
+================================================== */
 
 .shuffle {
 
-  margin-top: 11px;
+  margin-top: 6px;
 
-  height: 42px;
+  height: 38px;
 
-  padding: 0 22px;
+  padding:
+    0 21px;
 
   border: none;
 
-  border-radius: 21px;
+  border-radius: 19px;
 
   background: #111111;
 
   color: #ffffff;
 
-  font-family: inherit;
-
-  font-size: 15px;
+  font-size: 14px;
 
   font-weight: 500;
 
-  cursor: pointer;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.12);
 
   flex-shrink: 0;
 
-  box-shadow:
-    0 4px 10px rgba(0,0,0,0.12);
 }
 
 
 .shuffle:active {
 
-  transform: scale(0.95);
+  transform:
+    scale(0.95);
 
   opacity: 0.75;
+
 }
 
 
 /* ==================================================
-   LEGENDE UNTER DER KARTE
+   LEGENDE
 ================================================== */
 
 .legend {
 
-  width: min(380px, calc(100vw - 28px));
+  width: min(
 
-  margin-top: 15px;
+    380px,
+
+    calc(100vw - 28px)
+
+  );
+
+  margin-top: 7px;
 
   display: grid;
 
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
 
-  gap: 7px 10px;
+  gap: 5px 8px;
 
   flex-shrink: 0;
+
 }
 
 
 .legend-item {
 
-  min-height: 34px;
+  min-width: 0;
+
+  height: 30px;
 
   display: flex;
 
   align-items: center;
 
-  gap: 7px;
+  gap: 5px;
 
-  padding: 5px 9px;
+  padding:
+    3px 7px;
 
-  border-radius: 10px;
+  border-radius: 9px;
 
-  background: rgba(255,255,255,0.65);
+  background:
+    rgba(255,255,255,0.65);
 
-  font-size: 13px;
+  font-size: 12px;
 
   color: #222222;
+
 }
 
 
 .legend-symbol {
 
-  width: 22px;
+  width: 20px;
 
   flex-shrink: 0;
 
   text-align: center;
 
-  font-size: 19px;
+  font-size: 17px;
 
   line-height: 1;
+
 }
 
 
 .legend-text {
+
+  min-width: 0;
 
   overflow: hidden;
 
   white-space: nowrap;
 
   text-overflow: ellipsis;
+
 }
 
 
-/* --------------------------------------------------
-   Übungen ändern
--------------------------------------------------- */
+/* ==================================================
+   ÜBUNGEN ÄNDERN
+================================================== */
 
 .change-exercises {
 
-  margin-top: 10px;
+  margin-top: 5px;
+
+  padding:
+    2px 8px;
 
   border: none;
 
@@ -720,33 +825,26 @@ body {
 
   color: #555555;
 
-  font-family: inherit;
+  font-size: 12px;
 
-  font-size: 13px;
-
-  cursor: pointer;
 }
 
 
 /* ==================================================
-   KLEINERE DISPLAYS
+   KLEINERE DISPLAY-HÖHEN
 ================================================== */
 
-@media (max-height: 800px) {
-
-  .card-area {
-
-    width: min(330px, calc(100vw - 20px));
-
-  }
+@media (max-height: 750px) {
 
   .card-value {
 
     font-size: 145px;
 
-    transform: translateY(-32px);
+    transform:
+      translateY(-32px);
 
   }
+
 
   .card-suit {
 
@@ -756,90 +854,67 @@ body {
 
   }
 
+
   .corner {
 
     font-size: 25px;
 
   }
 
-  .legend {
-
-    margin-top: 10px;
-
-  }
-
 }
 
 
-/* --------------------------------------------------
-   Sehr kleine Displays
--------------------------------------------------- */
+/* ==================================================
+   SEHR KLEINE DISPLAYS
+================================================== */
 
 @media (max-height: 680px) {
 
-  .card-area {
-
-    width: min(280px, calc(100vw - 24px));
-
-  }
-
   .card-value {
 
-    font-size: 120px;
+    font-size: 125px;
 
-    transform: translateY(-25px);
+    transform:
+      translateY(-27px);
 
   }
+
 
   .card-suit {
 
-    top: 235px;
+    top: 250px;
 
-    font-size: 40px;
+    font-size: 42px;
 
   }
+
 
   .corner {
 
-    font-size: 21px;
+    font-size: 22px;
 
   }
+
 
   .remaining {
 
     height: 32px;
 
-    margin-top: 7px;
+    margin-top: 5px;
 
   }
+
 
   .shuffle {
 
     height: 36px;
 
-    margin-top: 6px;
+    margin-top: 4px;
 
   }
+
 
   .legend {
-
-    margin-top: 7px;
-
-    gap: 4px 7px;
-
-  }
-
-  .legend-item {
-
-    min-height: 29px;
-
-    padding: 3px 6px;
-
-    font-size: 11px;
-
-  }
-
-  .change-exercises {
 
     margin-top: 5px;
 
@@ -847,7 +922,48 @@ body {
 
 }
 
+
+/* ==================================================
+   EXTREM KLEINE HÖHE
+================================================== */
+
+@media (max-height: 620px) {
+
+  .card-value {
+
+    font-size: 108px;
+
+  }
+
+
+  .card-suit {
+
+    top: 218px;
+
+    font-size: 37px;
+
+  }
+
+
+  .corner {
+
+    font-size: 19px;
+
+  }
+
+
+  .legend-item {
+
+    height: 26px;
+
+    font-size: 10px;
+
+  }
+
+}
+
 </style>
+
 </head>
 
 
@@ -858,16 +974,17 @@ body {
      STARTSEITE
 ================================================== -->
 
-<main
-  class="app"
+<section
+  class="setup-screen"
   id="setupScreen"
 >
 
-  <section class="setup">
+  <div class="setup">
 
     <h1 class="setup-title">
       Kartenstapel
     </h1>
+
 
     <p class="setup-subtitle">
       Ordne jedem Symbol eine Sportübung zu.
@@ -881,7 +998,9 @@ body {
 
       <div class="exercise-row">
 
-        <div class="exercise-symbol black">
+        <div
+          class="exercise-symbol black"
+        >
           ♠
         </div>
 
@@ -900,7 +1019,9 @@ body {
 
       <div class="exercise-row">
 
-        <div class="exercise-symbol red">
+        <div
+          class="exercise-symbol red"
+        >
           ♥
         </div>
 
@@ -919,7 +1040,9 @@ body {
 
       <div class="exercise-row">
 
-        <div class="exercise-symbol red">
+        <div
+          class="exercise-symbol red"
+        >
           ♦
         </div>
 
@@ -938,7 +1061,9 @@ body {
 
       <div class="exercise-row">
 
-        <div class="exercise-symbol black">
+        <div
+          class="exercise-symbol black"
+        >
           ♣
         </div>
 
@@ -963,17 +1088,17 @@ body {
       Training starten
     </button>
 
-  </section>
+  </div>
 
-</main>
+</section>
 
 
 <!-- ==================================================
      SPIELSEITE
 ================================================== -->
 
-<main
-  class="game"
+<section
+  class="game-screen"
   id="gameScreen"
 >
 
@@ -1037,7 +1162,7 @@ body {
     Übungen ändern
   </button>
 
-</main>
+</section>
 
 
 <script>
@@ -1149,12 +1274,16 @@ function shuffleDeck() {
         Math.random() * (i + 1)
       );
 
+
     [
       deck[i],
       deck[randomIndex]
+
     ] = [
+
       deck[randomIndex],
       deck[i]
+
     ];
 
   }
@@ -1163,7 +1292,7 @@ function shuffleDeck() {
 
 
 /* ==================================================
-   RESTKARTEN
+   RESTKARTEN AKTUALISIEREN
 ================================================== */
 
 function updateRemaining() {
@@ -1171,10 +1300,16 @@ function updateRemaining() {
   const remaining =
     deck.length - currentIndex;
 
+
   document
     .getElementById("remaining")
     .textContent =
-      `${remaining} ${remaining === 1 ? "Karte" : "Karten"} übrig`;
+
+      `${remaining} ${
+        remaining === 1
+          ? "Karte"
+          : "Karten"
+      } übrig`;
 
 }
 
@@ -1185,12 +1320,13 @@ function updateRemaining() {
 
 function showBack() {
 
-  const card =
-    document.getElementById("card");
+  document
+    .getElementById("card")
+    .innerHTML = `
 
-  card.innerHTML = `
-    <div class="card-back"></div>
-  `;
+      <div class="card-back"></div>
+
+    `;
 
 }
 
@@ -1204,6 +1340,7 @@ function showCard(data) {
   const card =
     document.getElementById("card");
 
+
   const color =
     data.color === "red"
       ? "red"
@@ -1214,40 +1351,58 @@ function showCard(data) {
 
     <div class="card-front">
 
-      <div class="
-        corner
-        top
-        ${color}
-      ">
+
+      <div
+        class="
+          corner
+          top
+          ${color}
+        "
+      >
+
         ${data.rank}<br>
         ${data.symbol}
+
       </div>
 
 
-      <div class="
-        card-value
-        ${color}
-      ">
+      <div
+        class="
+          card-value
+          ${color}
+        "
+      >
+
         ${data.rank}
+
       </div>
 
 
-      <div class="
-        card-suit
-        ${color}
-      ">
+      <div
+        class="
+          card-suit
+          ${color}
+        "
+      >
+
         ${data.symbol}
+
       </div>
 
 
-      <div class="
-        corner
-        bottom
-        ${color}
-      ">
+      <div
+        class="
+          corner
+          bottom
+          ${color}
+        "
+      >
+
         ${data.rank}<br>
         ${data.symbol}
+
       </div>
+
 
     </div>
 
@@ -1265,6 +1420,7 @@ function updateLegend() {
   const legend =
     document.getElementById("legend");
 
+
   legend.innerHTML = "";
 
 
@@ -1273,6 +1429,7 @@ function updateLegend() {
     const item =
       document.createElement("div");
 
+
     item.className =
       "legend-item";
 
@@ -1280,8 +1437,10 @@ function updateLegend() {
     const symbol =
       document.createElement("div");
 
+
     symbol.className =
       `legend-symbol ${suit.color}`;
+
 
     symbol.textContent =
       suit.symbol;
@@ -1290,11 +1449,15 @@ function updateLegend() {
     const text =
       document.createElement("div");
 
+
     text.className =
       "legend-text";
 
+
     text.textContent =
-      exercises[suit.key] ||
+
+      exercises[suit.key]
+      ||
       "Keine Übung";
 
 
@@ -1323,17 +1486,20 @@ function startTraining() {
         .value
         .trim(),
 
+
     hearts:
       document
         .getElementById("exercise-hearts")
         .value
         .trim(),
 
+
     diamonds:
       document
         .getElementById("exercise-diamonds")
         .value
         .trim(),
+
 
     clubs:
       document
@@ -1346,17 +1512,19 @@ function startTraining() {
 
   document
     .getElementById("setupScreen")
-    .style.display = "none";
+    .style.display =
+      "none";
 
 
   document
     .getElementById("gameScreen")
-    .style.display = "flex";
+    .style.display =
+      "flex";
 
-
-  resetDeck();
 
   updateLegend();
+
+  resetDeck();
 
 }
 
@@ -1368,13 +1536,15 @@ function startTraining() {
 function changeExercises() {
 
   document
-    .getElementById("setupScreen")
-    .style.display = "flex";
+    .getElementById("gameScreen")
+    .style.display =
+      "none";
 
 
   document
-    .getElementById("gameScreen")
-    .style.display = "none";
+    .getElementById("setupScreen")
+    .style.display =
+      "flex";
 
 
   document
@@ -1404,7 +1574,7 @@ function changeExercises() {
 
 
 /* ==================================================
-   NEU STARTEN
+   NEU MISCHEN
 ================================================== */
 
 function resetDeck() {
@@ -1443,7 +1613,9 @@ function drawCard() {
 
   card.classList.remove("flip");
 
+
   void card.offsetWidth;
+
 
   card.classList.add("flip");
 
@@ -1454,7 +1626,9 @@ function drawCard() {
       deck[currentIndex]
     );
 
+
     currentIndex++;
+
 
     updateRemaining();
 
