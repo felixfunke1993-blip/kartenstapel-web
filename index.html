@@ -3,20 +3,31 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+
+<meta
+    name="viewport"
+    content="width=device-width,
+             initial-scale=1.0,
+             viewport-fit=cover,
+             maximum-scale=1.0,
+             user-scalable=no"
+>
 
 <title>Kartenstapel</title>
 
 <style>
+
 :root {
-    --background: #f5f5f7;
-    --card: #ffffff;
-    --text: #1d1d1f;
-    --secondary: #86868b;
-    --border: rgba(0,0,0,0.08);
-    --shadow: 0 18px 45px rgba(0,0,0,0.12);
-    --button: #1d1d1f;
+    --bg-top: #f8f9fb;
+    --bg-bottom: #e9ebef;
+    --text: #111214;
+    --red: #d72f25;
+    --button: #111214;
 }
+
+/* --------------------------------------------------
+   Grundlayout
+-------------------------------------------------- */
 
 * {
     box-sizing: border-box;
@@ -26,14 +37,25 @@
 html,
 body {
     margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
 }
 
 body {
+
+    min-height: 100dvh;
+
+    overflow: hidden;
+
     background:
-        radial-gradient(circle at 50% 20%, #ffffff 0%, #f5f5f7 45%, #ededf0 100%);
-    color: var(--text);
+        radial-gradient(
+            circle at 50% 35%,
+            #ffffff 0%,
+            var(--bg-top) 35%,
+            var(--bg-bottom) 100%
+        );
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -47,166 +69,82 @@ body {
     justify-content: center;
     align-items: center;
 
-    min-height: 100dvh;
-
     padding:
-        env(safe-area-inset-top)
+        max(20px, env(safe-area-inset-top))
         20px
-        env(safe-area-inset-bottom)
-        20px;
-
-    overflow: hidden;
-    user-select: none;
-    -webkit-user-select: none;
+        max(20px, env(safe-area-inset-bottom));
 }
 
+/* --------------------------------------------------
+   App
+-------------------------------------------------- */
+
 .app {
+
     width: 100%;
-    max-width: 420px;
     height: 100%;
-    max-height: 900px;
 
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
+
+    gap: 0;
 }
 
-/* Überschrift */
-
-.title {
-    font-size: 21px;
-    font-weight: 600;
-    letter-spacing: -0.4px;
-    margin-bottom: 28px;
-}
-
-/* Karte */
+/* --------------------------------------------------
+   Karte
+-------------------------------------------------- */
 
 .card-area {
-    width: min(76vw, 300px);
+
+    width: min(66vw, 245px);
     aspect-ratio: 2 / 3;
+
     perspective: 1000px;
+
     cursor: pointer;
+
+    flex-shrink: 0;
 }
 
 .card {
+
     width: 100%;
     height: 100%;
+
     position: relative;
 
     transform-style: preserve-3d;
 
-    border-radius: 18px;
+    border-radius: 16px;
 
-    box-shadow: var(--shadow);
+    box-shadow:
+        0 18px 35px rgba(0,0,0,0.13),
+        0 4px 10px rgba(0,0,0,0.07);
 
-    transition:
-        transform 0.42s cubic-bezier(.2,.8,.2,1),
-        box-shadow 0.2s ease;
+    overflow: hidden;
 
-    will-change: transform;
+    background: white;
 }
 
-.card-area:active .card {
-    transform: scale(0.985);
-}
+/* --------------------------------------------------
+   Kartenrückseite
+-------------------------------------------------- */
 
-.card.flipping {
-    animation: flipCard 0.42s cubic-bezier(.2,.8,.2,1);
-}
+.card-back {
 
-@keyframes flipCard {
-    0% {
-        transform: rotateY(0deg);
-    }
-
-    50% {
-        transform: rotateY(90deg);
-    }
-
-    100% {
-        transform: rotateY(0deg);
-    }
-}
-
-/* Kartenflächen */
-
-.card-face {
     position: absolute;
     inset: 0;
 
-    border-radius: 18px;
+    border-radius: 16px;
 
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-
-    overflow: hidden;
-}
-
-/* Vorderseite */
-
-.card-front {
-    background: #fff;
-
-    border: 1px solid rgba(0,0,0,0.06);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-center {
-    font-size: clamp(52px, 17vw, 76px);
-    font-weight: 500;
-    line-height: 1;
-
-    letter-spacing: -3px;
-}
-
-.red {
-    color: #d52b1e;
-}
-
-.black {
-    color: #1d1d1f;
-}
-
-/* Kartenecken */
-
-.card-corner {
-    position: absolute;
-
-    font-size: clamp(20px, 6vw, 27px);
-    font-weight: 500;
-
-    line-height: 0.95;
-
-    text-align: center;
-
-    letter-spacing: -1px;
-}
-
-.card-corner.top {
-    top: 17px;
-    left: 18px;
-}
-
-.card-corner.bottom {
-    bottom: 17px;
-    right: 18px;
-
-    transform: rotate(180deg);
-}
-
-/* Rückseite */
-
-.card-back {
     background:
         linear-gradient(
             135deg,
-            #ffffff 0%,
-            #f7f7f8 100%
+            #fefefe,
+            #f2f3f5
         );
 
     border: 1px solid rgba(0,0,0,0.08);
@@ -216,63 +154,203 @@ body {
     justify-content: center;
 }
 
+/* innerer Rahmen */
+
 .card-back::before {
+
     content: "";
 
-    width: 76%;
+    position: absolute;
+
+    width: 78%;
     height: 84%;
 
-    border-radius: 12px;
+    border-radius: 10px;
 
-    border: 1px solid rgba(0,0,0,0.13);
+    border: 1px solid rgba(0,0,0,0.12);
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(0,0,0,0.025) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba(0,0,0,0.025) 50%,
-            rgba(0,0,0,0.025) 75%,
-            transparent 75%
+
+        repeating-linear-gradient(
+            45deg,
+            rgba(0,0,0,0.025) 0px,
+            rgba(0,0,0,0.025) 2px,
+            transparent 2px,
+            transparent 7px
+        );
+}
+
+/* --------------------------------------------------
+   Kartenvorderseite
+-------------------------------------------------- */
+
+.card-front {
+
+    position: absolute;
+    inset: 0;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(0,0,0,0.06);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+/* --------------------------------------------------
+   Großer Kartenwert
+-------------------------------------------------- */
+
+.card-value {
+
+    font-size: clamp(78px, 22vw, 108px);
+
+    font-weight: 500;
+
+    letter-spacing: -5px;
+
+    line-height: 0.85;
+
+    transform: translateY(-4px);
+}
+
+/* --------------------------------------------------
+   Kartensymbol
+-------------------------------------------------- */
+
+.card-suit {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform:
+        translateY(
+            calc(
+                50% + 48px
+            )
         );
 
-    background-size: 14px 14px;
-}
+    font-size: 34px;
 
-/* Info */
+    line-height: 1;
 
-.status {
-    margin-top: 22px;
-
-    font-size: 15px;
     font-weight: 400;
-
-    color: var(--secondary);
-
-    letter-spacing: -0.1px;
 }
 
-/* Button */
+/* Farben */
+
+.red {
+    color: var(--red);
+}
+
+.black {
+    color: var(--text);
+}
+
+/* --------------------------------------------------
+   Kleine Kartenecken
+-------------------------------------------------- */
+
+.corner {
+
+    position: absolute;
+
+    font-size: 19px;
+
+    font-weight: 500;
+
+    line-height: 0.9;
+
+    text-align: center;
+
+    letter-spacing: -1px;
+}
+
+.corner.top {
+
+    top: 15px;
+    left: 16px;
+}
+
+.corner.bottom {
+
+    bottom: 15px;
+    right: 16px;
+
+    transform: rotate(180deg);
+}
+
+/* --------------------------------------------------
+   Flip Animation
+-------------------------------------------------- */
+
+.flip {
+
+    animation:
+        flip 0.42s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes flip {
+
+    0% {
+        transform:
+            rotateY(0deg)
+            scale(1);
+    }
+
+    45% {
+        transform:
+            rotateY(90deg)
+            scale(0.97);
+    }
+
+    100% {
+        transform:
+            rotateY(0deg)
+            scale(1);
+    }
+}
+
+/* --------------------------------------------------
+   Button
+-------------------------------------------------- */
 
 .shuffle {
-    margin-top: 28px;
+
+    margin-top: 24px;
+
+    height: 42px;
+
+    padding: 0 20px;
 
     border: none;
 
+    border-radius: 999px;
+
     background: var(--button);
+
     color: white;
 
     font-family: inherit;
 
     font-size: 15px;
+
     font-weight: 500;
 
-    padding: 12px 19px;
-
-    border-radius: 999px;
+    letter-spacing: -0.1px;
 
     cursor: pointer;
+
+    flex-shrink: 0;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.12);
 
     transition:
         transform 0.15s ease,
@@ -280,55 +358,52 @@ body {
 }
 
 .shuffle:active {
-    transform: scale(0.96);
+
+    transform: scale(0.95);
+
     opacity: 0.75;
 }
 
-/* Hinweis */
-
-.hint {
-    margin-top: 13px;
-
-    font-size: 13px;
-
-    color: #a1a1a6;
-
-    letter-spacing: -0.1px;
-}
-
-/* Kleine Displays */
+/* --------------------------------------------------
+   Kleine Displays
+-------------------------------------------------- */
 
 @media (max-height: 700px) {
 
-    .title {
-        margin-bottom: 16px;
-    }
-
     .card-area {
-        width: min(68vw, 250px);
-    }
 
-    .status {
-        margin-top: 14px;
+        width: min(58vw, 205px);
+
     }
 
     .shuffle {
-        margin-top: 18px;
+
+        margin-top: 16px;
+
+        height: 40px;
+
     }
 }
 
-/* Größere Displays */
+/* --------------------------------------------------
+   Sehr kleine Displays
+-------------------------------------------------- */
 
-@media (min-width: 700px) {
-
-    body {
-        background: #f5f5f7;
-    }
+@media (max-height: 620px) {
 
     .card-area {
-        width: 300px;
+
+        width: 175px;
+
+    }
+
+    .shuffle {
+
+        margin-top: 12px;
+
     }
 }
+
 </style>
 </head>
 
@@ -336,64 +411,65 @@ body {
 
 <main class="app">
 
-    <div class="title">
-        Kartenstapel
-    </div>
-
     <div
         class="card-area"
         id="cardArea"
-        aria-label="Nächste Karte aufdecken"
+        aria-label="Nächste Karte"
     >
 
-        <div class="card" id="card">
+        <div
+            class="card"
+            id="card"
+        >
 
-            <div class="card-face card-back"></div>
+            <div class="card-back"></div>
 
         </div>
 
     </div>
 
-    <div class="status" id="status">
-        52 Karten übrig
-    </div>
-
     <button
         class="shuffle"
         id="shuffle"
-        type="button"
     >
         Neu mischen
     </button>
 
-    <div class="hint">
-        Tippe auf die Karte
-    </div>
-
 </main>
+
 
 <script>
 
+/* --------------------------------------------------
+   Karten
+-------------------------------------------------- */
+
 const suits = [
+
     {
         symbol: "♠",
         color: "black"
     },
+
     {
         symbol: "♥",
         color: "red"
     },
+
     {
         symbol: "♦",
         color: "red"
     },
+
     {
         symbol: "♣",
         color: "black"
     }
+
 ];
 
 const ranks = [
+
     "2",
     "3",
     "4",
@@ -407,36 +483,47 @@ const ranks = [
     "Q",
     "K",
     "A"
+
 ];
 
+
 let deck = [];
+
 let currentIndex = 0;
 
 
-/* Kartenstapel erstellen */
+/* --------------------------------------------------
+   Stapel erstellen
+-------------------------------------------------- */
 
 function createDeck() {
 
     deck = [];
 
-    suits.forEach(suit => {
+    for (const suit of suits) {
 
-        ranks.forEach(rank => {
+        for (const rank of ranks) {
 
             deck.push({
+
                 rank: rank,
+
                 symbol: suit.symbol,
+
                 color: suit.color
+
             });
 
-        });
+        }
 
-    });
+    }
 
 }
 
 
-/* Fisher-Yates Shuffle */
+/* --------------------------------------------------
+   Zufälliges Mischen
+-------------------------------------------------- */
 
 function shuffleDeck() {
 
@@ -446,14 +533,16 @@ function shuffleDeck() {
         i--
     ) {
 
-        const randomIndex =
-            Math.floor(Math.random() * (i + 1));
+        const random =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
 
         [
             deck[i],
-            deck[randomIndex]
+            deck[random]
         ] = [
-            deck[randomIndex],
+            deck[random],
             deck[i]
         ];
 
@@ -462,61 +551,73 @@ function shuffleDeck() {
 }
 
 
-/* Stapel zurücksetzen */
-
-function resetDeck() {
-
-    createDeck();
-    shuffleDeck();
-
-    currentIndex = 0;
-
-    showBack();
-    updateStatus();
-
-}
-
-
-/* Rückseite anzeigen */
+/* --------------------------------------------------
+   Rückseite
+-------------------------------------------------- */
 
 function showBack() {
 
-    const card = document.getElementById("card");
+    const card =
+        document.getElementById("card");
 
     card.innerHTML = `
-        <div class="card-face card-back"></div>
+        <div class="card-back"></div>
     `;
 
 }
 
 
-/* Karte anzeigen */
+/* --------------------------------------------------
+   Vorderseite
+-------------------------------------------------- */
 
-function showCard(cardData) {
+function showCard(data) {
 
-    const card = document.getElementById("card");
+    const card =
+        document.getElementById("card");
 
-    const colorClass =
-        cardData.color === "red"
+    const color =
+        data.color === "red"
             ? "red"
             : "black";
 
     card.innerHTML = `
 
-        <div class="card-face card-front">
+        <div class="card-front">
 
-            <div class="card-corner top ${colorClass}">
-                ${cardData.rank}<br>
-                ${cardData.symbol}
+            <div class="
+                corner
+                top
+                ${color}
+            ">
+                ${data.rank}<br>
+                ${data.symbol}
             </div>
 
-            <div class="card-center ${colorClass}">
-                ${cardData.symbol}
+
+            <div class="
+                card-value
+                ${color}
+            ">
+                ${data.rank}
             </div>
 
-            <div class="card-corner bottom ${colorClass}">
-                ${cardData.rank}<br>
-                ${cardData.symbol}
+
+            <div class="
+                card-suit
+                ${color}
+            ">
+                ${data.symbol}
+            </div>
+
+
+            <div class="
+                corner
+                bottom
+                ${color}
+            ">
+                ${data.rank}<br>
+                ${data.symbol}
             </div>
 
         </div>
@@ -526,57 +627,69 @@ function showCard(cardData) {
 }
 
 
-/* Anzeige aktualisieren */
+/* --------------------------------------------------
+   Neuer Stapel
+-------------------------------------------------- */
 
-function updateStatus() {
+function resetDeck() {
 
-    const remaining =
-        deck.length - currentIndex;
+    createDeck();
 
-    document.getElementById("status")
-        .textContent =
-        `${remaining} Karten übrig`;
+    shuffleDeck();
+
+    currentIndex = 0;
+
+    showBack();
 
 }
 
 
-/* Nächste Karte */
+/* --------------------------------------------------
+   Karte ziehen
+-------------------------------------------------- */
 
 function drawCard() {
 
-    if (currentIndex >= deck.length) {
-
-        resetDeck();
+    if (
+        currentIndex >= deck.length
+    ) {
 
         return;
 
     }
 
+
     const card =
         document.getElementById("card");
 
-    card.classList.remove("flipping");
+
+    card.classList.remove("flip");
+
 
     /* Animation neu starten */
 
     void card.offsetWidth;
 
-    card.classList.add("flipping");
+
+    card.classList.add("flip");
+
 
     setTimeout(() => {
 
-        showCard(deck[currentIndex]);
+        showCard(
+            deck[currentIndex]
+        );
 
         currentIndex++;
-
-        updateStatus();
 
     }, 210);
 
 }
 
 
-/* Kartenbereich */
+/* --------------------------------------------------
+   Events
+-------------------------------------------------- */
 
 document
     .getElementById("cardArea")
@@ -586,8 +699,6 @@ document
     );
 
 
-/* Mischen */
-
 document
     .getElementById("shuffle")
     .addEventListener(
@@ -596,7 +707,9 @@ document
     );
 
 
-/* Start */
+/* --------------------------------------------------
+   Start
+-------------------------------------------------- */
 
 resetDeck();
 
