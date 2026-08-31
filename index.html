@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -16,6 +15,7 @@
 
 <title>Kartenstapel</title>
 
+<!-- iPhone Home-Bildschirm -->
 <link
   rel="apple-touch-icon"
   sizes="180x180"
@@ -41,39 +41,39 @@
 <style>
 
 /* ==================================================
-   GRUNDLAGE
+   KARTENSTAPEL – VERSION 5.0
 ================================================== */
 
 :root {
-
   --background: #d1d1d6;
-
+  --card: #ffffff;
+  --text: #111111;
   --red: #d62828;
-
-  --black: #111111;
-
 }
 
+
+/* --------------------------------------------------
+   Grundlayout
+-------------------------------------------------- */
 
 * {
-
   box-sizing: border-box;
-
   -webkit-tap-highlight-color: transparent;
-
 }
-
 
 html,
 body {
 
   width: 100%;
-
   height: 100%;
 
   margin: 0;
-
   padding: 0;
+}
+
+body {
+
+  min-height: 100dvh;
 
   overflow: hidden;
 
@@ -89,100 +89,92 @@ body {
     sans-serif;
 
   user-select: none;
-
   -webkit-user-select: none;
-
 }
 
 
-button,
-input {
+/* --------------------------------------------------
+   Gemeinsames App-Layout
+-------------------------------------------------- */
 
-  font-family: inherit;
-
-}
-
-
-/* ==================================================
-   STARTSEITE
-================================================== */
-
-.setup-screen {
-
-  position: fixed;
-
-  inset: 0;
+.app {
 
   width: 100%;
-
   height: 100dvh;
 
-  padding:
-    calc(env(safe-area-inset-top) + 20px)
-    20px
-    calc(env(safe-area-inset-bottom) + 20px);
+  padding-top:
+    env(safe-area-inset-top);
+
+  padding-bottom:
+    env(safe-area-inset-bottom);
 
   display: flex;
+
+  flex-direction: column;
 
   align-items: center;
 
   justify-content: center;
-
-  overflow-y: auto;
-
 }
 
+
+/* ==================================================
+   STARTSEITE – LEGENDEN
+================================================== */
 
 .setup {
 
-  width: 100%;
+  width: min(90vw, 420px);
 
-  max-width: 420px;
+  display: flex;
 
+  flex-direction: column;
+
+  align-items: center;
 }
 
+
+/* Überschrift */
 
 .setup-title {
 
-  margin: 0;
+  margin: 0 0 8px 0;
 
-  text-align: center;
+  font-size: 28px;
 
-  font-size: 30px;
-
-  font-weight: 650;
+  font-weight: 600;
 
   color: #111111;
-
 }
 
 
+/* Untertitel */
+
 .setup-subtitle {
 
-  margin:
-    8px 0 25px;
-
-  text-align: center;
+  margin: 0 0 28px 0;
 
   font-size: 15px;
 
   color: #555555;
 
+  text-align: center;
 }
 
 
-/* ==================================================
-   ÜBUNGSFELDER
-================================================== */
+/* --------------------------------------------------
+   Übungszeilen
+-------------------------------------------------- */
 
 .exercise-list {
+
+  width: 100%;
 
   display: flex;
 
   flex-direction: column;
 
   gap: 12px;
-
 }
 
 
@@ -196,21 +188,20 @@ input {
 
   align-items: center;
 
-  gap: 12px;
+  gap: 14px;
 
-  padding:
-    6px 8px 6px 14px;
+  padding: 6px 8px 6px 14px;
 
-  background:
-    rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.78);
 
   border-radius: 16px;
 
   box-shadow:
     0 3px 10px rgba(0,0,0,0.07);
-
 }
 
+
+/* Symbol */
 
 .exercise-symbol {
 
@@ -223,20 +214,16 @@ input {
   font-size: 30px;
 
   line-height: 1;
-
 }
 
 
+/* Eingabefeld */
+
 .exercise-input {
 
-  min-width: 0;
-
-  flex: 1;
+  width: 100%;
 
   height: 44px;
-
-  padding:
-    0 13px;
 
   border: none;
 
@@ -244,51 +231,56 @@ input {
 
   border-radius: 12px;
 
+  padding: 0 13px;
+
   background: #ffffff;
 
   color: #111111;
 
+  font-family: inherit;
+
   font-size: 16px;
 
   -webkit-appearance: none;
-
 }
 
 
 .exercise-input::placeholder {
 
   color: #999999;
-
 }
 
 
-/* ==================================================
-   STARTBUTTON
-================================================== */
+/* --------------------------------------------------
+   Startbutton
+-------------------------------------------------- */
 
 .start-button {
 
+  margin-top: 24px;
+
   width: 100%;
 
-  height: 50px;
-
-  margin-top: 24px;
+  height: 48px;
 
   border: none;
 
-  border-radius: 25px;
+  border-radius: 24px;
 
   background: #111111;
 
   color: #ffffff;
 
+  font-family: inherit;
+
   font-size: 16px;
 
   font-weight: 600;
 
+  cursor: pointer;
+
   box-shadow:
     0 5px 14px rgba(0,0,0,0.14);
-
 }
 
 
@@ -296,6 +288,7 @@ input {
 
   transform: scale(0.97);
 
+  opacity: 0.8;
 }
 
 
@@ -303,15 +296,10 @@ input {
    SPIELSEITE
 ================================================== */
 
-.game-screen {
-
-  position: fixed;
-
-  inset: 0;
+.game {
 
   width: 100%;
-
-  height: 100dvh;
+  height: 100%;
 
   display: none;
 
@@ -319,80 +307,52 @@ input {
 
   align-items: center;
 
-  justify-content: flex-start;
-
-  padding:
-    calc(env(safe-area-inset-top) + 8px)
-    10px
-    calc(env(safe-area-inset-bottom) + 5px);
-
-  overflow: hidden;
-
+  justify-content: center;
 }
 
 
-/* ==================================================
-   KARTE
-================================================== */
+/* --------------------------------------------------
+   Karte
+-------------------------------------------------- */
 
 .card-area {
 
-  /*
-     Kompakteres Kartenverhältnis.
+  width: min(380px, calc(100vw - 14px));
 
-     Maximale Größe:
-     ca. 270 × 375 px
-
-     Dadurch bleibt unter der Karte
-     ausreichend Platz für die restlichen
-     Bedienelemente.
-  */
-
-  width: min(
-
-    270px,
-
-    calc(100vw - 38px)
-
-  );
-
-  aspect-ratio: 0.72;
+  aspect-ratio: 2 / 3;
 
   flex-shrink: 0;
 
-  perspective: 1000px;
+  perspective: 1200px;
 
   cursor: pointer;
-
 }
 
 
 .card {
 
   width: 100%;
-
   height: 100%;
 
   position: relative;
 
-  background: #ffffff;
+  background: white;
 
-  border-radius: 17px;
+  border-radius: 21px;
 
   overflow: hidden;
 
   box-shadow:
-    0 14px 30px rgba(0,0,0,0.16),
-    0 3px 7px rgba(0,0,0,0.08);
+    0 20px 40px rgba(0,0,0,0.18),
+    0 4px 9px rgba(0,0,0,0.09);
 
   transform-style: preserve-3d;
-
 }
 
 
-/* ==================================================
-   KARTENRÜCKSEITE
-================================================== */
+/* --------------------------------------------------
+   Kartenrückseite
+-------------------------------------------------- */
 
 .card-back {
 
@@ -402,22 +362,16 @@ input {
 
   background:
     repeating-linear-gradient(
-
       135deg,
-
       #111111 0px,
       #111111 5px,
-
       #ffffff 5px,
       #ffffff 6px,
-
       #111111 6px,
       #111111 11px
-
     );
 
-  border: 2px solid #111111;
-
+  border: 3px solid #111111;
 }
 
 
@@ -427,24 +381,15 @@ input {
 
   position: absolute;
 
-  inset: 5%;
+  inset: 15px;
 
-  border-radius: 12px;
+  border-radius: 15px;
 
-  border:
-    2px solid
-    rgba(255,255,255,0.9);
+  border: 2px solid rgba(255,255,255,0.9);
 
   box-shadow:
-
-    inset
-    0 0 0 2px
-    #111111,
-
-    inset
-    0 0 0 3px
-    rgba(255,255,255,0.8);
-
+    inset 0 0 0 3px #111111,
+    inset 0 0 0 4px rgba(255,255,255,0.8);
 }
 
 
@@ -454,20 +399,17 @@ input {
 
   position: absolute;
 
-  inset: 8%;
+  inset: 24px;
 
-  border-radius: 9px;
+  border-radius: 11px;
 
-  border:
-    1px solid
-    rgba(255,255,255,0.75);
-
+  border: 1px solid rgba(255,255,255,0.75);
 }
 
 
-/* ==================================================
-   KARTENVORDERSEITE
-================================================== */
+/* --------------------------------------------------
+   Kartenvorderseite
+-------------------------------------------------- */
 
 .card-front {
 
@@ -477,87 +419,63 @@ input {
 
   background: #ffffff;
 
-  border-radius: 17px;
+  border-radius: 21px;
 
-  border:
-    1px solid
-    rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
 
   display: flex;
 
   align-items: center;
 
   justify-content: center;
-
 }
 
 
-/* ==================================================
-   KARTENZAHL
-================================================== */
+/* --------------------------------------------------
+   Kartenzahl
+-------------------------------------------------- */
 
 .card-value {
 
-  font-size: clamp(
-    90px,
-    34vw,
-    128px
-  );
+  font-size: 166px;
 
   line-height: 1;
 
   font-weight: 500;
 
-  letter-spacing: -6px;
+  letter-spacing: -8px;
 
-  transform:
-    translateY(-8%);
-
+  transform: translateY(-38px);
 }
 
 
-/* ==================================================
-   MITTLERES SYMBOL
-================================================== */
+/* --------------------------------------------------
+   Mittleres Symbol
+-------------------------------------------------- */
 
 .card-suit {
 
   position: absolute;
 
-  left: 0;
+  top: 335px;
 
-  right: 0;
-
-  top: 58%;
-
-  text-align: center;
-
-  font-size: clamp(
-    34px,
-    12vw,
-    43px
-  );
+  font-size: 55px;
 
   line-height: 1;
-
 }
 
 
-/* ==================================================
-   ECKEN
-================================================== */
+/* --------------------------------------------------
+   Kartenecken
+-------------------------------------------------- */
 
 .corner {
 
   position: absolute;
 
-  width: 15%;
+  width: 42px;
 
-  font-size: clamp(
-    18px,
-    6vw,
-    22px
-  );
+  font-size: 29px;
 
   font-weight: 500;
 
@@ -565,53 +483,44 @@ input {
 
   text-align: center;
 
-  letter-spacing: -0.5px;
-
+  letter-spacing: -0.7px;
 }
 
 
 .corner.top {
 
-  top: 5%;
+  top: 23px;
 
-  left: 5%;
-
+  left: 24px;
 }
 
 
 .corner.bottom {
 
-  right: 5%;
+  right: 24px;
 
-  bottom: 5%;
+  bottom: 23px;
 
-  transform:
-    rotate(180deg);
-
+  transform: rotate(180deg);
 }
 
 
-/* ==================================================
-   FARBEN
-================================================== */
+/* --------------------------------------------------
+   Farben
+-------------------------------------------------- */
 
 .red {
-
   color: var(--red);
-
 }
-
 
 .black {
-
-  color: var(--black);
-
+  color: var(--text);
 }
 
 
-/* ==================================================
-   ANIMATION
-================================================== */
+/* --------------------------------------------------
+   Animation
+-------------------------------------------------- */
 
 .flip {
 
@@ -619,7 +528,6 @@ input {
     flipCard
     0.40s
     cubic-bezier(.2,.8,.2,1);
-
 }
 
 
@@ -652,25 +560,23 @@ input {
 }
 
 
-/* ==================================================
-   RESTKARTEN
-================================================== */
+/* --------------------------------------------------
+   Restkarten
+-------------------------------------------------- */
 
 .remaining {
 
-  margin-top: 7px;
+  margin-top: 15px;
 
-  height: 32px;
+  min-width: 145px;
 
-  min-width: 135px;
+  height: 38px;
 
-  padding:
-    0 15px;
+  padding: 0 18px;
 
-  border-radius: 16px;
+  border-radius: 19px;
 
-  background:
-    rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.72);
 
   color: #111111;
 
@@ -680,154 +586,133 @@ input {
 
   justify-content: center;
 
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: 500;
 
   box-shadow:
-    0 3px 9px rgba(0,0,0,0.07);
+    0 3px 10px rgba(0,0,0,0.08);
 
   flex-shrink: 0;
-
 }
 
 
-/* ==================================================
-   MISCHEN
-================================================== */
+/* --------------------------------------------------
+   Mischbutton
+-------------------------------------------------- */
 
 .shuffle {
 
-  margin-top: 5px;
+  margin-top: 11px;
 
-  height: 36px;
+  height: 42px;
 
-  padding:
-    0 20px;
+  padding: 0 22px;
 
   border: none;
 
-  border-radius: 18px;
+  border-radius: 21px;
 
   background: #111111;
 
   color: #ffffff;
 
-  font-size: 13px;
+  font-family: inherit;
+
+  font-size: 15px;
 
   font-weight: 500;
 
-  box-shadow:
-    0 4px 10px rgba(0,0,0,0.12);
+  cursor: pointer;
 
   flex-shrink: 0;
 
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.12);
 }
 
 
 .shuffle:active {
 
-  transform:
-    scale(0.95);
+  transform: scale(0.95);
 
   opacity: 0.75;
-
 }
 
 
 /* ==================================================
-   LEGENDE
+   LEGENDE UNTER DER KARTE
 ================================================== */
 
 .legend {
 
-  width: min(
+  width: min(380px, calc(100vw - 28px));
 
-    360px,
-
-    calc(100vw - 28px)
-
-  );
-
-  margin-top: 6px;
+  margin-top: 15px;
 
   display: grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
-  gap: 5px 7px;
+  gap: 7px 10px;
 
   flex-shrink: 0;
-
 }
 
 
 .legend-item {
 
-  min-width: 0;
-
-  height: 28px;
+  min-height: 34px;
 
   display: flex;
 
   align-items: center;
 
-  gap: 5px;
+  gap: 7px;
 
-  padding:
-    2px 7px;
+  padding: 5px 9px;
 
-  border-radius: 9px;
+  border-radius: 10px;
 
-  background:
-    rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.65);
 
-  font-size: 11px;
+  font-size: 13px;
 
   color: #222222;
-
 }
 
 
 .legend-symbol {
 
-  width: 18px;
+  width: 22px;
 
   flex-shrink: 0;
 
   text-align: center;
 
-  font-size: 16px;
+  font-size: 19px;
 
   line-height: 1;
-
 }
 
 
 .legend-text {
-
-  min-width: 0;
 
   overflow: hidden;
 
   white-space: nowrap;
 
   text-overflow: ellipsis;
-
 }
 
 
-/* ==================================================
-   ÜBUNGEN ÄNDERN
-================================================== */
+/* --------------------------------------------------
+   Übungen ändern
+-------------------------------------------------- */
 
 .change-exercises {
 
-  margin-top: 4px;
-
-  padding:
-    2px 8px;
+  margin-top: 10px;
 
   border: none;
 
@@ -835,8 +720,11 @@ input {
 
   color: #555555;
 
-  font-size: 11px;
+  font-family: inherit;
 
+  font-size: 13px;
+
+  cursor: pointer;
 }
 
 
@@ -844,90 +732,122 @@ input {
    KLEINERE DISPLAYS
 ================================================== */
 
-@media (max-height: 700px) {
-
-  .game-screen {
-
-    padding-top:
-      calc(env(safe-area-inset-top) + 5px);
-
-  }
-
+@media (max-height: 800px) {
 
   .card-area {
 
-    width: min(
-
-      250px,
-
-      calc(100vw - 45px)
-
-    );
+    width: min(330px, calc(100vw - 20px));
 
   }
 
+  .card-value {
 
-  .remaining {
+    font-size: 145px;
 
-    margin-top: 5px;
-
-  }
-
-
-  .shuffle {
-
-    margin-top: 4px;
+    transform: translateY(-32px);
 
   }
 
+  .card-suit {
+
+    top: 290px;
+
+    font-size: 48px;
+
+  }
+
+  .corner {
+
+    font-size: 25px;
+
+  }
 
   .legend {
 
-    margin-top: 5px;
+    margin-top: 10px;
 
   }
 
 }
 
 
-/* ==================================================
-   SEHR KLEINE DISPLAYS
-================================================== */
+/* --------------------------------------------------
+   Sehr kleine Displays
+-------------------------------------------------- */
 
-@media (max-height: 620px) {
+@media (max-height: 680px) {
 
   .card-area {
 
-    width: min(
-
-      220px,
-
-      calc(100vw - 55px)
-
-    );
+    width: min(280px, calc(100vw - 24px));
 
   }
 
+  .card-value {
+
+    font-size: 120px;
+
+    transform: translateY(-25px);
+
+  }
+
+  .card-suit {
+
+    top: 235px;
+
+    font-size: 40px;
+
+  }
+
+  .corner {
+
+    font-size: 21px;
+
+  }
+
+  .remaining {
+
+    height: 32px;
+
+    margin-top: 7px;
+
+  }
+
+  .shuffle {
+
+    height: 36px;
+
+    margin-top: 6px;
+
+  }
+
+  .legend {
+
+    margin-top: 7px;
+
+    gap: 4px 7px;
+
+  }
 
   .legend-item {
 
-    height: 25px;
+    min-height: 29px;
 
-    font-size: 10px;
+    padding: 3px 6px;
+
+    font-size: 11px;
 
   }
 
-
   .change-exercises {
 
-    font-size: 10px;
+    margin-top: 5px;
 
   }
 
 }
 
 </style>
-
 </head>
 
 
@@ -938,17 +858,16 @@ input {
      STARTSEITE
 ================================================== -->
 
-<section
-  class="setup-screen"
+<main
+  class="app"
   id="setupScreen"
 >
 
-  <div class="setup">
+  <section class="setup">
 
     <h1 class="setup-title">
       Kartenstapel
     </h1>
-
 
     <p class="setup-subtitle">
       Ordne jedem Symbol eine Sportübung zu.
@@ -957,6 +876,8 @@ input {
 
     <div class="exercise-list">
 
+
+      <!-- ♠ -->
 
       <div class="exercise-row">
 
@@ -975,6 +896,8 @@ input {
       </div>
 
 
+      <!-- ♥ -->
+
       <div class="exercise-row">
 
         <div class="exercise-symbol red">
@@ -992,6 +915,8 @@ input {
       </div>
 
 
+      <!-- ♦ -->
+
       <div class="exercise-row">
 
         <div class="exercise-symbol red">
@@ -1008,6 +933,8 @@ input {
 
       </div>
 
+
+      <!-- ♣ -->
 
       <div class="exercise-row">
 
@@ -1036,20 +963,22 @@ input {
       Training starten
     </button>
 
-  </div>
+  </section>
 
-</section>
+</main>
 
 
 <!-- ==================================================
      SPIELSEITE
 ================================================== -->
 
-<section
-  class="game-screen"
+<main
+  class="game"
   id="gameScreen"
 >
 
+
+  <!-- Karte -->
 
   <div
     class="card-area"
@@ -1069,6 +998,8 @@ input {
   </div>
 
 
+  <!-- Restkarten -->
+
   <div
     class="remaining"
     id="remaining"
@@ -1076,6 +1007,8 @@ input {
     52 Karten übrig
   </div>
 
+
+  <!-- Neu mischen -->
 
   <button
     class="shuffle"
@@ -1086,11 +1019,15 @@ input {
   </button>
 
 
+  <!-- Legende -->
+
   <div
     class="legend"
     id="legend"
   ></div>
 
+
+  <!-- Übungen ändern -->
 
   <button
     class="change-exercises"
@@ -1100,8 +1037,7 @@ input {
     Übungen ändern
   </button>
 
-
-</section>
+</main>
 
 
 <script>
@@ -1173,7 +1109,6 @@ function createDeck() {
 
   deck = [];
 
-
   for (const suit of suits) {
 
     for (const rank of ranks) {
@@ -1214,16 +1149,12 @@ function shuffleDeck() {
         Math.random() * (i + 1)
       );
 
-
     [
       deck[i],
       deck[randomIndex]
-
     ] = [
-
       deck[randomIndex],
       deck[i]
-
     ];
 
   }
@@ -1240,33 +1171,26 @@ function updateRemaining() {
   const remaining =
     deck.length - currentIndex;
 
-
   document
     .getElementById("remaining")
     .textContent =
-
-      `${remaining} ${
-        remaining === 1
-          ? "Karte"
-          : "Karten"
-      } übrig`;
+      `${remaining} ${remaining === 1 ? "Karte" : "Karten"} übrig`;
 
 }
 
 
 /* ==================================================
-   RÜCKSEITE
+   KARTENRÜCKSEITE
 ================================================== */
 
 function showBack() {
 
-  document
-    .getElementById("card")
-    .innerHTML = `
+  const card =
+    document.getElementById("card");
 
-      <div class="card-back"></div>
-
-    `;
+  card.innerHTML = `
+    <div class="card-back"></div>
+  `;
 
 }
 
@@ -1280,7 +1204,6 @@ function showCard(data) {
   const card =
     document.getElementById("card");
 
-
   const color =
     data.color === "red"
       ? "red"
@@ -1291,58 +1214,40 @@ function showCard(data) {
 
     <div class="card-front">
 
-
-      <div
-        class="
-          corner
-          top
-          ${color}
-        "
-      >
-
+      <div class="
+        corner
+        top
+        ${color}
+      ">
         ${data.rank}<br>
         ${data.symbol}
-
       </div>
 
 
-      <div
-        class="
-          card-value
-          ${color}
-        "
-      >
-
+      <div class="
+        card-value
+        ${color}
+      ">
         ${data.rank}
-
       </div>
 
 
-      <div
-        class="
-          card-suit
-          ${color}
-        "
-      >
-
+      <div class="
+        card-suit
+        ${color}
+      ">
         ${data.symbol}
-
       </div>
 
 
-      <div
-        class="
-          corner
-          bottom
-          ${color}
-        "
-      >
-
+      <div class="
+        corner
+        bottom
+        ${color}
+      ">
         ${data.rank}<br>
         ${data.symbol}
-
       </div>
-
 
     </div>
 
@@ -1352,14 +1257,13 @@ function showCard(data) {
 
 
 /* ==================================================
-   LEGENDE
+   LEGENDE AKTUALISIEREN
 ================================================== */
 
 function updateLegend() {
 
   const legend =
     document.getElementById("legend");
-
 
   legend.innerHTML = "";
 
@@ -1369,7 +1273,6 @@ function updateLegend() {
     const item =
       document.createElement("div");
 
-
     item.className =
       "legend-item";
 
@@ -1377,10 +1280,8 @@ function updateLegend() {
     const symbol =
       document.createElement("div");
 
-
     symbol.className =
       `legend-symbol ${suit.color}`;
-
 
     symbol.textContent =
       suit.symbol;
@@ -1389,15 +1290,11 @@ function updateLegend() {
     const text =
       document.createElement("div");
 
-
     text.className =
       "legend-text";
 
-
     text.textContent =
-
-      exercises[suit.key]
-      ||
+      exercises[suit.key] ||
       "Keine Übung";
 
 
@@ -1426,20 +1323,17 @@ function startTraining() {
         .value
         .trim(),
 
-
     hearts:
       document
         .getElementById("exercise-hearts")
         .value
         .trim(),
 
-
     diamonds:
       document
         .getElementById("exercise-diamonds")
         .value
         .trim(),
-
 
     clubs:
       document
@@ -1452,19 +1346,17 @@ function startTraining() {
 
   document
     .getElementById("setupScreen")
-    .style.display =
-      "none";
+    .style.display = "none";
 
 
   document
     .getElementById("gameScreen")
-    .style.display =
-      "flex";
+    .style.display = "flex";
 
-
-  updateLegend();
 
   resetDeck();
+
+  updateLegend();
 
 }
 
@@ -1476,15 +1368,13 @@ function startTraining() {
 function changeExercises() {
 
   document
-    .getElementById("gameScreen")
-    .style.display =
-      "none";
+    .getElementById("setupScreen")
+    .style.display = "flex";
 
 
   document
-    .getElementById("setupScreen")
-    .style.display =
-      "flex";
+    .getElementById("gameScreen")
+    .style.display = "none";
 
 
   document
@@ -1514,7 +1404,7 @@ function changeExercises() {
 
 
 /* ==================================================
-   NEU MISCHEN
+   NEU STARTEN
 ================================================== */
 
 function resetDeck() {
@@ -1553,9 +1443,7 @@ function drawCard() {
 
   card.classList.remove("flip");
 
-
   void card.offsetWidth;
-
 
   card.classList.add("flip");
 
@@ -1566,9 +1454,7 @@ function drawCard() {
       deck[currentIndex]
     );
 
-
     currentIndex++;
-
 
     updateRemaining();
 
