@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -18,8 +17,8 @@
 <style>
 
 /* ==================================================
-   KARTENSTAPEL – VERSION 3.2
-   Optimiert für iPhone 15
+   KARTENSTAPEL – VERSION 4.0
+   Große Karte + Kartenrücken + Restkartenanzeige
 ================================================== */
 
 :root {
@@ -97,12 +96,12 @@ body {
 
 .card-area {
 
-  width: 300px;
-  height: 450px;
+  width: min(380px, calc(100vw - 14px));
+  aspect-ratio: 2 / 3;
 
   flex-shrink: 0;
 
-  perspective: 1000px;
+  perspective: 1200px;
 
   cursor: pointer;
 }
@@ -116,13 +115,13 @@ body {
 
   background: white;
 
-  border-radius: 18px;
+  border-radius: 21px;
 
   overflow: hidden;
 
   box-shadow:
-    0 16px 32px rgba(0,0,0,0.16),
-    0 3px 7px rgba(0,0,0,0.08);
+    0 20px 40px rgba(0,0,0,0.18),
+    0 4px 9px rgba(0,0,0,0.09);
 
   transform-style: preserve-3d;
 }
@@ -137,9 +136,18 @@ body {
 
   inset: 0;
 
-  background: #f8f8f8;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #111111 0px,
+      #111111 5px,
+      #ffffff 5px,
+      #ffffff 6px,
+      #111111 6px,
+      #111111 11px
+    );
 
-  border: 1px solid rgba(0,0,0,0.08);
+  border: 3px solid #111111;
 
   display: flex;
 
@@ -148,19 +156,26 @@ body {
   justify-content: center;
 }
 
+/* Innerer Kartenrahmen */
+
 .card-back::before {
 
   content: "";
 
   position: absolute;
 
-  width: 82%;
-  height: 86%;
+  inset: 15px;
 
-  border-radius: 12px;
+  border-radius: 15px;
 
-  border: 1px solid rgba(0,0,0,0.14);
+  border: 2px solid rgba(255,255,255,0.9);
+
+  box-shadow:
+    inset 0 0 0 3px #111111,
+    inset 0 0 0 4px rgba(255,255,255,0.8);
 }
+
+/* Zweiter feiner Rahmen */
 
 .card-back::after {
 
@@ -168,19 +183,11 @@ body {
 
   position: absolute;
 
-  width: 76%;
-  height: 80%;
+  inset: 24px;
 
-  border-radius: 9px;
+  border-radius: 11px;
 
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(0,0,0,0.025) 0px,
-      rgba(0,0,0,0.025) 1px,
-      transparent 1px,
-      transparent 6px
-    );
+  border: 1px solid rgba(255,255,255,0.75);
 }
 
 /* --------------------------------------------------
@@ -195,7 +202,7 @@ body {
 
   background: #ffffff;
 
-  border-radius: 18px;
+  border-radius: 21px;
 
   border: 1px solid rgba(0,0,0,0.06);
 
@@ -212,28 +219,28 @@ body {
 
 .card-value {
 
-  font-size: 128px;
+  font-size: 166px;
 
   line-height: 1;
 
   font-weight: 500;
 
-  letter-spacing: -6px;
+  letter-spacing: -8px;
 
-  transform: translateY(-25px);
+  transform: translateY(-38px);
 }
 
 /* --------------------------------------------------
-   Symbol
+   Mittleres Symbol
 -------------------------------------------------- */
 
 .card-suit {
 
   position: absolute;
 
-  top: 265px;
+  top: 335px;
 
-  font-size: 44px;
+  font-size: 55px;
 
   line-height: 1;
 }
@@ -246,7 +253,7 @@ body {
 
   position: absolute;
 
-  font-size: 23px;
+  font-size: 29px;
 
   font-weight: 500;
 
@@ -254,21 +261,27 @@ body {
 
   text-align: center;
 
-  letter-spacing: -0.5px;
+  letter-spacing: -0.7px;
+
+  width: 42px;
 }
+
+/* Oben links */
 
 .corner.top {
 
-  top: 19px;
+  top: 23px;
 
-  left: 20px;
+  left: 24px;
 }
+
+/* Unten rechts */
 
 .corner.bottom {
 
-  right: 20px;
+  right: 24px;
 
-  bottom: 19px;
+  bottom: 23px;
 
   transform: rotate(180deg);
 }
@@ -278,12 +291,10 @@ body {
 -------------------------------------------------- */
 
 .red {
-
   color: var(--red);
 }
 
 .black {
-
   color: var(--text);
 }
 
@@ -328,17 +339,53 @@ body {
 }
 
 /* --------------------------------------------------
+   Restkartenanzeige
+-------------------------------------------------- */
+
+.remaining {
+
+  margin-top: 15px;
+
+  min-width: 145px;
+
+  height: 38px;
+
+  padding: 0 18px;
+
+  border-radius: 19px;
+
+  background: rgba(255,255,255,0.72);
+
+  color: #111111;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.08);
+
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------
    Misch-Button
 -------------------------------------------------- */
 
 .shuffle {
 
-  margin-top: 20px;
+  margin-top: 11px;
 
   height: 42px;
 
   padding:
-    0 20px;
+    0 22px;
 
   border: none;
 
@@ -374,37 +421,42 @@ body {
 }
 
 /* --------------------------------------------------
-   iPhone mit kleinerer Höhe
+   Kleinere Displays
 -------------------------------------------------- */
 
-@media (max-height: 700px) {
+@media (max-height: 760px) {
 
   .card-area {
 
-    width: 215px;
-    height: 323px;
+    width: min(330px, calc(100vw - 20px));
 
   }
 
   .card-value {
 
-    font-size: 94px;
+    font-size: 145px;
 
-    transform: translateY(-9px);
+    transform: translateY(-32px);
 
   }
 
   .card-suit {
 
-    top: 190px;
+    top: 290px;
 
-    font-size: 36px;
+    font-size: 48px;
 
   }
 
-  .shuffle {
+  .corner {
 
-    margin-top: 17px;
+    font-size: 25px;
+
+  }
+
+  .remaining {
+
+    margin-top: 12px;
 
   }
 
@@ -414,34 +466,51 @@ body {
    Sehr kleine Displays
 -------------------------------------------------- */
 
-@media (max-height: 620px) {
+@media (max-height: 650px) {
 
   .card-area {
 
-    width: 180px;
-    height: 270px;
+    width: min(285px, calc(100vw - 24px));
 
   }
 
   .card-value {
 
-    font-size: 84px;
+    font-size: 125px;
 
-    transform: translateY(-5px);
+    transform: translateY(-27px);
 
   }
 
   .card-suit {
 
-    top: 155px;
+    top: 245px;
 
-    font-size: 32px;
+    font-size: 42px;
+
+  }
+
+  .corner {
+
+    font-size: 22px;
+
+  }
+
+  .remaining {
+
+    height: 34px;
+
+    margin-top: 9px;
+
+    font-size: 14px;
 
   }
 
   .shuffle {
 
-    margin-top: 14px;
+    height: 38px;
+
+    margin-top: 8px;
 
   }
 
@@ -472,6 +541,18 @@ body {
 
   </div>
 
+
+  <!-- Restkarten -->
+
+  <div
+    class="remaining"
+    id="remaining"
+  >
+    52 Karten übrig
+  </div>
+
+
+  <!-- Mischen -->
 
   <button
     class="shuffle"
@@ -599,6 +680,23 @@ function shuffleDeck() {
 
 
 /* --------------------------------------------------
+   Restkarten anzeigen
+-------------------------------------------------- */
+
+function updateRemaining() {
+
+  const remaining =
+    deck.length - currentIndex;
+
+  document
+    .getElementById("remaining")
+    .textContent =
+      `${remaining} ${remaining === 1 ? "Karte" : "Karten"} übrig`;
+
+}
+
+
+/* --------------------------------------------------
    Rückseite
 -------------------------------------------------- */
 
@@ -689,6 +787,8 @@ function resetDeck() {
 
   showBack();
 
+  updateRemaining();
+
 }
 
 
@@ -726,6 +826,8 @@ function drawCard() {
 
     currentIndex++;
 
+    updateRemaining();
+
   }, 200);
 
 }
@@ -761,4 +863,3 @@ resetDeck();
 
 </body>
 </html>
-```
