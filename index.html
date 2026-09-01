@@ -345,7 +345,7 @@ input {
 
   align-items: center;
 
-  justify-content: flex-start;
+  justify-content: center;
 
   padding:
     calc(env(safe-area-inset-top) + 8px)
@@ -363,16 +363,16 @@ input {
 
 .timer {
 
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 
-  height: 34px;
+  height: 42px;
 
-  min-width: 108px;
+  min-width: 122px;
 
   padding:
-    0 18px;
+    0 24px;
 
-  border-radius: 17px;
+  border-radius: 21px;
 
   background: rgba(17,17,17,0.9);
 
@@ -390,7 +390,7 @@ input {
     "Menlo",
     monospace;
 
-  font-size: 17px;
+  font-size: 20px;
 
   font-weight: 600;
 
@@ -414,21 +414,15 @@ input {
 
   width: min(
 
-    285px,
+    300px,
 
-    calc(100vw - 30px)
+    calc(100vw - 36px),
 
-  );
-
-  height: min(
-
-    356px,
-
-    calc(100dvh - 305px)
+    calc((100dvh - 300px) * 0.7143)
 
   );
 
-  aspect-ratio: 0.80;
+  aspect-ratio: 0.7143;
 
   flex-shrink: 1;
 
@@ -449,17 +443,17 @@ input {
 
   background: #ffffff;
 
-  border-radius: 18px;
+  border-radius: 20px;
 
   overflow: hidden;
 
   box-shadow:
 
-    0 16px 34px
-    rgba(0,0,0,0.17),
+    0 18px 38px
+    rgba(0,0,0,0.18),
 
-    0 4px 8px
-    rgba(0,0,0,0.08);
+    0 4px 9px
+    rgba(0,0,0,0.09);
 
   transform-style: preserve-3d;
 
@@ -506,7 +500,7 @@ input {
 
   inset: 5%;
 
-  border-radius: 13px;
+  border-radius: 14px;
 
   border:
     2px solid
@@ -533,7 +527,7 @@ input {
 
   inset: 8%;
 
-  border-radius: 10px;
+  border-radius: 11px;
 
   border:
     1px solid
@@ -554,7 +548,7 @@ input {
 
   background: #ffffff;
 
-  border-radius: 18px;
+  border-radius: 20px;
 
   border:
     1px solid
@@ -575,7 +569,7 @@ input {
 
 .card-value {
 
-  font-size: 120px;
+  font-size: 132px;
 
   line-height: 1;
 
@@ -605,7 +599,7 @@ input {
 
   text-align: center;
 
-  font-size: 40px;
+  font-size: 46px;
 
   line-height: 1;
 
@@ -620,9 +614,9 @@ input {
 
   position: absolute;
 
-  width: 17%;
+  width: 18%;
 
-  font-size: 21px;
+  font-size: 24px;
 
   font-weight: 500;
 
@@ -723,16 +717,16 @@ input {
 
 .remaining {
 
-  margin-top: 8px;
+  margin-top: 16px;
 
-  height: 34px;
+  height: 40px;
 
-  min-width: 145px;
+  min-width: 165px;
 
   padding:
-    0 17px;
+    0 20px;
 
-  border-radius: 17px;
+  border-radius: 20px;
 
   background:
     rgba(255,255,255,0.78);
@@ -745,7 +739,7 @@ input {
 
   justify-content: center;
 
-  font-size: 14px;
+  font-size: 16px;
 
   font-weight: 500;
 
@@ -763,22 +757,22 @@ input {
 
 .shuffle {
 
-  margin-top: 6px;
+  margin-top: 12px;
 
-  height: 40px;
+  height: 48px;
 
   padding:
-    0 23px;
+    0 28px;
 
   border: none;
 
-  border-radius: 20px;
+  border-radius: 24px;
 
   background: #111111;
 
   color: #ffffff;
 
-  font-size: 14px;
+  font-size: 16px;
 
   font-weight: 500;
 
@@ -808,20 +802,20 @@ input {
 
   width: min(
 
-    390px,
+    430px,
 
     calc(100vw - 24px)
 
   );
 
-  margin-top: 10px;
+  margin-top: 18px;
 
   display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 7px 8px;
+  gap: 10px 10px;
 
   flex-shrink: 0;
 
@@ -832,23 +826,23 @@ input {
 
   min-width: 0;
 
-  height: 36px;
+  height: 44px;
 
   display: flex;
 
   align-items: center;
 
-  gap: 7px;
+  gap: 9px;
 
   padding:
-    3px 9px;
+    4px 12px;
 
-  border-radius: 11px;
+  border-radius: 13px;
 
   background:
     rgba(255,255,255,0.72);
 
-  font-size: 13px;
+  font-size: 15px;
 
   color: #222222;
 
@@ -860,13 +854,13 @@ input {
 
 .legend-symbol {
 
-  width: 21px;
+  width: 24px;
 
   flex-shrink: 0;
 
   text-align: center;
 
-  font-size: 19px;
+  font-size: 22px;
 
   line-height: 1;
 
@@ -892,7 +886,7 @@ input {
 
 .change-exercises {
 
-  margin-top: 5px;
+  margin-top: 12px;
 
   padding:
     2px 10px;
@@ -903,7 +897,7 @@ input {
 
   color: #555555;
 
-  font-size: 12px;
+  font-size: 13px;
 
 }
 
@@ -914,19 +908,13 @@ input {
 
 @media (max-height: 750px) {
 
-  .game-screen {
-
-    padding-top:
-      calc(env(safe-area-inset-top) + 5px);
-
-  }
-
-
   .timer {
 
-    height: 32px;
+    margin-bottom: 12px;
 
-    font-size: 16px;
+    height: 38px;
+
+    font-size: 18px;
 
   }
 
@@ -935,17 +923,11 @@ input {
 
     width: min(
 
-      275px,
+      270px,
 
-      calc(100vw - 32px)
+      calc(100vw - 38px),
 
-    );
-
-    height: min(
-
-      344px,
-
-      calc(100dvh - 295px)
+      calc((100dvh - 275px) * 0.7143)
 
     );
 
@@ -954,23 +936,52 @@ input {
 
   .card-value {
 
-    font-size: 116px;
+    font-size: 122px;
 
   }
 
 
   .card-suit {
 
-    font-size: 38px;
+    font-size: 42px;
+
+  }
+
+
+  .remaining {
+
+    margin-top: 12px;
+
+    height: 37px;
+
+    font-size: 15px;
+
+  }
+
+
+  .shuffle {
+
+    margin-top: 9px;
+
+    height: 44px;
+
+    font-size: 15px;
+
+  }
+
+
+  .legend {
+
+    margin-top: 13px;
 
   }
 
 
   .legend-item {
 
-    height: 34px;
+    height: 40px;
 
-    font-size: 12px;
+    font-size: 14px;
 
   }
 
@@ -985,88 +996,96 @@ input {
 
   .timer {
 
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 
-    height: 28px;
-
-    font-size: 14px;
-
-  }
-
-
-  .card-area {
-
-    width: 245px;
-
-    height: 306px;
-
-  }
-
-
-  .card-value {
-
-    font-size: 105px;
-
-  }
-
-
-  .card-suit {
-
-    font-size: 35px;
-
-  }
-
-
-  .remaining {
-
-    margin-top: 5px;
-
-    height: 30px;
-
-    font-size: 13px;
-
-  }
-
-
-  .shuffle {
-
-    margin-top: 4px;
-
-    height: 36px;
-
-    font-size: 13px;
-
-  }
-
-
-  .legend {
-
-    margin-top: 6px;
-
-    gap: 4px 6px;
-
-  }
-
-
-  .legend-item {
-
-    height: 30px;
-
-    font-size: 11px;
-
-  }
-
-
-  .legend-symbol {
+    height: 32px;
 
     font-size: 16px;
 
   }
 
 
+  .card-area {
+
+    width: min(
+
+      235px,
+
+      calc(100vw - 42px),
+
+      calc((100dvh - 245px) * 0.7143)
+
+    );
+
+  }
+
+
+  .card-value {
+
+    font-size: 108px;
+
+  }
+
+
+  .card-suit {
+
+    font-size: 37px;
+
+  }
+
+
+  .remaining {
+
+    margin-top: 8px;
+
+    height: 33px;
+
+    font-size: 14px;
+
+  }
+
+
+  .shuffle {
+
+    margin-top: 7px;
+
+    height: 40px;
+
+    font-size: 14px;
+
+  }
+
+
+  .legend {
+
+    margin-top: 9px;
+
+    gap: 6px 7px;
+
+  }
+
+
+  .legend-item {
+
+    height: 33px;
+
+    font-size: 12px;
+
+  }
+
+
+  .legend-symbol {
+
+    font-size: 18px;
+
+  }
+
+
   .change-exercises {
 
-    font-size: 10px;
+    margin-top: 8px;
+
+    font-size: 11px;
 
   }
 
