@@ -1,7 +1,6 @@
-```json
 {
-  "name": "Kartenstapel",
-  "short_name": "Kartenstapel",
+  "name": "FitDeck",
+  "short_name": "FitDeck",
   "description": "Sporttraining mit einem zufälligen Kartenstapel",
   "start_url": "./",
   "scope": "./",
@@ -18,4 +17,3 @@
     }
   ]
 }
-```
